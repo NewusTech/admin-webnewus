@@ -12,4 +12,6 @@ router.get('/login', userControllers.viewLogin);
 router.get('/forgot-pass', userControllers.viewForgotPass);
 router.get('/reset-pass', userControllers.viewResetPass);
 
+router.post("/login/process", userControllers.login);
+
 module.exports = router;

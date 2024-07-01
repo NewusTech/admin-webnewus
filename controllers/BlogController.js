@@ -26,6 +26,28 @@ module.exports = {
     });
   },
 
+  
+  detailBlog: async (req, res) => {
+    try {
+      const { slug } = req.params;
+  
+      // Panggil API dengan parameter slug
+      const blogResponse = await axios.get(
+        `https://api-services.newus.id/api/admin/${slug}/blog/detail`
+      );
+  
+      const responseData = blogResponse.data;
+  
+      res.render("blog/detail_blog", {
+        blogData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+  
+
   viewBlogCategory: async (req, res) => {
     let blogResponse = await axios.get(
       "https://api-services.newus.id/api/admin/kategoriblog/get"
@@ -89,11 +111,8 @@ module.exports = {
         publishAt,
         image,
         status,
+        token,
       } = req.body;
-
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTcxOTM4Mzg3NCwiZXhwIjoxNzE5NDcwMjc0fQ.gXp_jacDdvrTlWx3N4PxKevrSzMPtwZs4tdVIO9KmIc"; // Ganti dengan token Bearer Anda
-
       const response = await axios.post('https://api-services.newus.id/api/admin/blog/create', {
         title,
         slug,
@@ -108,6 +127,7 @@ module.exports = {
         updatedAt: new Date().toISOString(),
         image,
         status,
+        token,
       }, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -115,14 +135,13 @@ module.exports = {
           },
         });
 
-      if (response.status === 200) {
-        res.redirect('/blog'); // Ganti dengan rute yang sesuai setelah berhasil membuat blog
-      } else {
-        res.render('blog/add_blog', { error: 'Failed to create blog' });
-      }
+        if (response.status === 201) {
+          res.render('blog/add_blog', { successMessage: 'Blog created successfully' });
+        } else {
+          res.render('blog/add_blog', { errorMessage: 'Failed to create blog' });
+        }
     } catch (error) {
-      console.error('Error creating blog:', error);
-      res.render('blog/add_blog', { error: 'Error creating blog' });
+      res.render('blog/add_blog', { errorMessage: 'Error creating blog' });
     }
   },
   
