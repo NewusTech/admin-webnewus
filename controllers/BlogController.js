@@ -47,57 +47,7 @@ module.exports = {
       res.status(500).send("Terjadi kesalahan pada server");
     }
   },
-  
 
-  viewBlogCategory: async (req, res) => {
-    let blogResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/kategoriblog/get"
-    );
-
-    let responseData = blogResponse.data;
-
-    res.render("blog/blog_category", {
-      blogData : responseData.data,
-    });
-  },
-
-  viewPostBlogCategory: async (req, res) => {
-    let blogResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-
-    let blogData = blogResponse.data;
-
-    res.render("blog/add_blog_category", {
-      blogData,
-    });
-  },
-
-  viewBlogTag: async (req, res) => {
-    let blogResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/tagblog/get"
-    );
-
-    let responseData = blogResponse.data;
-
-    res.render("blog/blog_tag", {
-      blogData : responseData.data,
-    });
-  },
-
-  viewPostBlogTag: async (req, res) => {
-    let blogResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-
-    let blogData = blogResponse.data;
-
-    res.render("blog/add_blog_tag", {
-      blogData,
-    });
-  },
-
-  
   createBlog: async (req, res) => {
     try {
       const {
@@ -145,5 +95,97 @@ module.exports = {
       res.render('blog/add_blog', { errorMessage: 'Error creating blog' });
     }
   },
+  
+
+  viewBlogCategory: async (req, res) => {
+    let blogResponse = await axios.get(
+      "https://api-services.newus.id/api/admin/kategoriblog/get"
+    );
+
+    let responseData = blogResponse.data;
+
+    res.render("blog/blog_category", {
+      blogData : responseData.data,
+    });
+  },
+
+  viewPostBlogCategory: async (req, res) => {
+    let blogResponse = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+
+    let blogData = blogResponse.data;
+
+    res.render("blog/add_blog_category", {
+      blogData,
+    });
+  },
+
+  detailBlogCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const blogResponse = await axios.get(
+        `https://api-services.newus.id/api/admin/kategoriblog/get/${id}`
+      );
+  
+      const responseData = blogResponse.data;
+  
+      res.render("blog/detail_blog_category", {
+        blogData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  viewBlogTag: async (req, res) => {
+    let blogResponse = await axios.get(
+      "https://api-services.newus.id/api/admin/tagblog/get"
+    );
+
+    let responseData = blogResponse.data;
+
+    res.render("blog/blog_tag", {
+      blogData : responseData.data,
+    });
+  },
+
+  viewPostBlogTag: async (req, res) => {
+    let blogResponse = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+
+    let blogData = blogResponse.data;
+
+    res.render("blog/add_blog_tag", {
+      blogData,
+    });
+  },
+
+  detailBlogTag: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const blogResponse = await axios.get(
+        `https://api-services.newus.id/api/admin/tagblog/get/${id}`
+      );
+  
+      const responseData = blogResponse.data;
+  
+      res.render("blog/detail_blog_tag", {
+        blogData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  
+  
   
 };
