@@ -4,7 +4,8 @@ module.exports = {
 
   viewBlog: async (req, res) => {
     let blogResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/blog/get"
+      // "https://api-services.newus.id/api/admin/blog/get"
+      `${process.env.baseUrl}/admin/blog/get`,
     );
 
     let responseData = blogResponse.data;
