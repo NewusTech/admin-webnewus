@@ -4,13 +4,14 @@ module.exports = {
 
   viewGaleri: async (req, res) => {
     let galeriResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+      // "https://api-services.newus.id/api/admin/blog/get"
+      `${process.env.baseUrl}/admin/media/lists`,
     );
 
-    let galeriData = galeriResponse.data;
+    let responseData = galeriResponse.data;
 
     res.render("galeri/galeri", {
-      galeriData,
+      galeriData : responseData.data,
     });
   },
 
