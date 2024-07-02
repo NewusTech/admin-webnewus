@@ -26,4 +26,24 @@ module.exports = {
     });
   },
 
+  detailClient: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const blogResponse = await axios.get(
+        `https://api-services.newus.id/api//admin/${id}/client/detail`
+      );
+  
+      const responseData = blogResponse.data;
+  
+      res.render("client/detail_client", {
+        blogData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
 };
