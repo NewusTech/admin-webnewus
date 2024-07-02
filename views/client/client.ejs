@@ -96,8 +96,8 @@
                           <tr>
                             <td>
                               <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<%= client.title %>">
-                                <label for="checkbox-<%= client.title %>" class="custom-control-label">&nbsp;</label>
+                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<%= client.id %>">
+                                <label for="checkbox-<%= client.id %>" class="custom-control-label">&nbsp;</label>
                               </div>
                             </td>
                             <td><%= client.title %>
@@ -110,8 +110,8 @@
                               </div>
                             </td>
                             <td>
-                              <a href="#">
-                                <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1"><%= client.image %></div>
+                              <a href="">
+                                <img alt="image" src="<%= client.image %>" class="rounded-circle" width="200px" data-toggle="title" title=""> 
                               </a>
                             </td>
                           </tr>
