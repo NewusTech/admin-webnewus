@@ -77,14 +77,11 @@
                           </div>
                         </form>
                       </div>
-  
-                      <div class="clearfix mb-3"></div>
-  
                       <div class="table-responsive">
                         <table class="table table-striped">
                           <tr>
                             <th class="text-center pt-2">
-                              <div class="custom-checkbox custom-checkbox-table custom-control">
+                              <div class="custom-checkbox custom-checkbox-table custom-control" >
                                 <input type="checkbox" data-checkboxes="mygroup" data-checkbox-role="dad" class="custom-control-input" id="checkbox-all">
                                 <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                               </div>
@@ -96,13 +93,13 @@
                           <tr>
                             <td>
                               <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<%= portofolio_category.title %>">
-                                <label for="checkbox-<%= portofolio_category.title %>" class="custom-control-label">&nbsp;</label>
+                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<%= portofolio_category.id %>">
+                                <label for="checkbox-<%= portofolio_category.id %>" class="custom-control-label">&nbsp;</label>
                               </div>
                             </td>
                             <td><%= portofolio_category.title %>
                               <div class="table-links">
-                                <a href="#">View</a>
+                                <a href=" /portofolio/category/detail/<%= portofolio_category.id %>">View</a>
                                 <div class="bullet"></div>
                                 <a href="#">Edit</a>
                                 <div class="bullet"></div>

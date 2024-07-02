@@ -92,6 +92,7 @@
                             <th>Vision</th>
                             <th>Mision</th>
                           </tr>
+                          <% companyforEach(function(company) { %>
                           <tr>
                             <td>
                               <div class="custom-checkbox custom-control">
@@ -99,7 +100,7 @@
                                 <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
                               </div>
                             </td>
-                            <td>Laravel 5 Tutorial: Introduction
+                            <td><%= company.title %>
                               <div class="table-links">
                                 <a href="#">View</a>
                                 <div class="bullet"></div>
@@ -118,6 +119,7 @@
                               </a>
                             </td>
                           </tr>
+                          <% }); %>
                         </table>
                       </div>
                       <div class="float-right">

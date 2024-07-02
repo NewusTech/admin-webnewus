@@ -4,13 +4,13 @@ module.exports = {
 
   viewCompany: async (req, res) => {
     let companyResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+      `${process.env.baseUrl}/admin/aboutcompany/get`,
     );
 
-    let companyData = companyResponse.data;
+    let responseData = companyResponse.data;
 
     res.render("company/company", {
-      companyData,
+      companyData : responseData.data,
     });
   },
 
