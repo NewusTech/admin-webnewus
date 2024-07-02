@@ -27,4 +27,24 @@ module.exports = {
     });
   },
 
+  detailGaleri: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const galeriResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/media/detail`,
+      );
+  
+      const responseData = galeriResponse.data;
+  
+      res.render("galeri/detail_galeri", {
+        galeriData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
 };
