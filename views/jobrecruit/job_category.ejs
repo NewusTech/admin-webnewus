@@ -92,96 +92,26 @@
                             <th>Title</th>
                             <th>Created At</th>
                           </tr>
+                          <% jobrecruitmentcategoryData.forEach(function(job_category) { %>
                           <tr>
                             <td>
                               <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-2">
-                                <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
+                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<%= job_category.title %>">
+                                <label for="checkbox-<%= job_category.title %>" class="custom-control-label">&nbsp;</label>
                               </div>
                             </td>
-                            <td>Laravel 5 Tutorial: Introduction
+                            <td><%= job_category.title %>
                               <div class="table-links">
-                                <a href="#">View</a>
+                                <a href="/jobrecruit/category/detail/<%= job_category.id %>">View</a>
                                 <div class="bullet"></div>
                                 <a href="#">Edit</a>
                                 <div class="bullet"></div>
                                 <a href="#" class="text-danger">Trash</a>
                               </div>
                             </td>
-                            <td>2018-01-20</td>
+                            <td><%= job_category.createdAt %></td>
                           </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-3">
-                                <label for="checkbox-3" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>Laravel 5 Tutorial: Installing
-                              <div class="table-links">
-                                <a href="#">View</a>
-                                <div class="bullet"></div>
-                                <a href="#">Edit</a>
-                                <div class="bullet"></div>
-                                <a href="#" class="text-danger">Trash</a>
-                              </div>
-                            </td>
-                            <td>2018-01-20</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-4">
-                                <label for="checkbox-4" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>Laravel 5 Tutorial: MVC
-                              <div class="table-links">
-                                <a href="#">View</a>
-                                <div class="bullet"></div>
-                                <a href="#">Edit</a>
-                                <div class="bullet"></div>
-                                <a href="#" class="text-danger">Trash</a>
-                              </div>
-                            </td>
-                            <td>2018-01-20</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-5">
-                                <label for="checkbox-5" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>Laravel 5 Tutorial: CRUD
-                              <div class="table-links">
-                                <a href="#">View</a>
-                                <div class="bullet"></div>
-                                <a href="#">Edit</a>
-                                <div class="bullet"></div>
-                                <a href="#" class="text-danger">Trash</a>
-                              </div>
-                            </td>
-                            <td>2018-01-20</td>
-                          </tr>
-                          
-                            <td>
-                              <div class="custom-checkbox custom-control">
-                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
-                                <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                              </div>
-                            </td>
-                            <td>Laravel 5 Tutorial: Deployment
-                              <div class="table-links">
-                                <a href="#">View</a>
-                                <div class="bullet"></div>
-                                <a href="#">Edit</a>
-                                <div class="bullet"></div>
-                                <a href="#" class="text-danger">Trash</a>
-                              </div>
-                            </td>
-                            <td>2018-01-20</td>
-                          </tr>
+                          <% }); %>
                         </table>
                       </div>
                       <div class="float-right">

@@ -6,7 +6,7 @@ router.get('/jobrecruit', jobrecruitmentControllers.viewJobRecruitment);
 router.get('/jobrecruit/create', jobrecruitmentControllers.viewPostJobRecruitment);
 
 router.get('/jobrecruit/category', jobrecruitmentControllers.viewJobRecruitmentCategory);
-
 router.get('/jobrecruit/category/create', jobrecruitmentControllers.viewPostJobRecruitmentCategory);
+router.get('/jobrecruit/category/detail/:id', jobrecruitmentControllers.detailJobRecruitmentCategory);
 
 module.exports = router;
