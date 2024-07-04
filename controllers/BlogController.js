@@ -34,7 +34,7 @@ module.exports = {
   
       // Panggil API dengan parameter slug
       const blogResponse = await axios.get(
-        `https://api-services.newus.id/api/admin/${slug}/blog/detail`
+        `${process.env.baseUrl}/admin/${slug}/blog/detail`
       );
   
       const responseData = blogResponse.data;
@@ -64,7 +64,7 @@ module.exports = {
         status,
         token,
       } = req.body;
-      const response = await axios.post('https://api-services.newus.id/api/admin/blog/create', {
+      const response = await axios.post(`${process.env.baseUrl}/admin/blog/create`, {
         title,
         slug,
         keyword,
@@ -99,7 +99,7 @@ module.exports = {
 
   viewBlogCategory: async (req, res) => {
     let blogResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/kategoriblog/get"
+      `${process.env.baseUrl}/admin/kategoriblog/get`
     );
 
     let responseData = blogResponse.data;
@@ -127,7 +127,7 @@ module.exports = {
   
       // Panggil API dengan parameter id
       const blogResponse = await axios.get(
-        `https://api-services.newus.id/api/admin/kategoriblog/get/${id}`
+        `${process.env.baseUrl}/admin/kategoriblog/get/${id}`
       );
   
       const responseData = blogResponse.data;
@@ -143,7 +143,7 @@ module.exports = {
 
   viewBlogTag: async (req, res) => {
     let blogResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/tagblog/get"
+      `${process.env.baseUrl}/admin/tagblog/get`
     );
 
     let responseData = blogResponse.data;
@@ -171,7 +171,7 @@ module.exports = {
   
       // Panggil API dengan parameter id
       const blogResponse = await axios.get(
-        `https://api-services.newus.id/api/admin/tagblog/get/${id}`
+        `${process.env.baseUrl}/admin/tagblog/get/${id}`
       );
   
       const responseData = blogResponse.data;

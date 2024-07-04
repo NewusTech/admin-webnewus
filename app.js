@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const fileUpload = require('express-fileupload');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var portofolioRouter = require('./routes/portofolio');
@@ -19,6 +20,9 @@ var galeriRouter = require('./routes/galeri');
 var clientRouter = require('./routes/client');
 
 var app = express();
+
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 require('dotenv').config();
 

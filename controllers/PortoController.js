@@ -4,7 +4,7 @@ module.exports = {
 
   viewPortofolio: async (req, res) => {
     let portofolioResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/blog/get"
+      `${process.env.baseUrl}/admin/blog/get`
     );
 
     let responseData = portofolioResponse.data;
@@ -48,7 +48,7 @@ module.exports = {
 
   viewPortofolioCategory: async (req, res) => {
     let portofolioResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/kategoriportofolio/get"
+      `${process.env.baseUrl}/admin/kategoriportofolio/get`
     );
 
     let responseData = portofolioResponse.data;
@@ -93,7 +93,7 @@ module.exports = {
 
   viewPortofolioTag: async (req, res) => {
     let portofolioResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/tagportofolio/get"
+      `${process.env.baseUrl}/admin/tagportofolio/get`
     );
 
     let responseData = portofolioResponse.data;
@@ -134,8 +134,4 @@ module.exports = {
       res.status(500).send("Terjadi kesalahan pada server");
     }
   },
-
-
-
-
 };
