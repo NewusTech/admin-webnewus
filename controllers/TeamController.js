@@ -91,5 +91,33 @@ module.exports = {
       res.status(500).send("Terjadi kesalahan pada server");
     }
   },
+
+  createTeamCategory: async (req, res) => {
+    try {
+      const {
+        title,
+        token,
+      } = req.body;
+      const response = await axios.post(`${process.env.baseUrl}/admin/divitioncategory/category`, {
+        title,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        token,
+      }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 201) {
+          res.render('team/add_team_category', { successMessage: 'Team Category created successfully' });
+        } else {
+          res.render('team/add_team_category', { errorMessage: 'Failed to create team' });
+        }
+    } catch (error) {
+      res.render('team/add_team_category', { errorMessage: 'Error creating team' });
+    }
+  },
   
 };
