@@ -4,7 +4,7 @@ module.exports = {
 
   viewClient: async (req, res) => {
     let clientResponse = await axios.get(
-      "https://api-services.newus.id/api/admin/client/get"
+      `${process.env.baseUrl}/admin/client/get`
     );
 
     let responseData = clientResponse.data;
@@ -32,7 +32,7 @@ module.exports = {
   
       // Panggil API dengan parameter id
       const blogResponse = await axios.get(
-        `https://api-services.newus.id/api//admin/${id}/client/detail`
+        `${process.env.baseUrl}/admin/${id}/client/detail`
       );
   
       const responseData = blogResponse.data;
