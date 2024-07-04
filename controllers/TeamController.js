@@ -34,7 +34,7 @@ module.exports = {
   
       // Panggil API dengan parameter id
       const teamResponse = await axios.get(
-        `https://api-services.newus.id/api/admin/${id}/team/detail/admin/`
+        `${process.env.baseUrl}/admin/${id}/team/detail/admin/`
       );
   
       const responseData = teamResponse.data;
@@ -47,16 +47,16 @@ module.exports = {
       res.status(500).send("Terjadi kesalahan pada server");
     }
   },
-  
+
   viewTeamCategory: async (req, res) => {
     let teamResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+     `${process.env.baseUrl}/admin/divitioncategory/lists`
     );
 
-    let teamData = teamResponse.data;
+    let responseData = teamResponse.data;
 
     res.render("team/team_category", {
-      teamData,
+      teamData : responseData.data,
     });
   },
 
@@ -71,4 +71,25 @@ module.exports = {
       teamData,
     });
   },
+
+  detailTeamCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const teamResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/divitioncategory/detail`
+      );
+  
+      const responseData = teamResponse.data;
+  
+      res.render("team/detail_team_category", {
+        teamData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+  
 };

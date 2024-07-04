@@ -7,5 +7,6 @@ router.get('/admin/:id/client/detail', teamControllers.detailTeam);
 
 router.get('/team/category', teamControllers.viewTeamCategory);
 router.get('/team/category/create', teamControllers.viewPostTeamCategory);
+router.get('/team/category/detail/:id', teamControllers.detailTeamCategory);
 
 module.exports = router;
