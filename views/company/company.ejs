@@ -90,9 +90,9 @@
                             </th>
                             <th>Description</th>
                             <th>Vision</th>
-                            <th>Mision</th>
+                            <th>Mission</th>
                           </tr>
-                          <% companyforEach(function(company) { %>
+                          <% companyData.forEach(function(company) { %>
                           <tr>
                             <td>
                               <div class="custom-checkbox custom-control">
@@ -100,7 +100,7 @@
                                 <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
                               </div>
                             </td>
-                            <td><%= company.title %>
+                            <td><%= company.body %>
                               <div class="table-links">
                                 <a href="#">View</a>
                                 <div class="bullet"></div>
@@ -110,13 +110,10 @@
                               </div>
                             </td>
                             <td>
-                              <a href="#">Web Developer</a>,
-                              <a href="#">Tutorial</a>
+                              <%= company.vision %>
                             </td>
                             <td>
-                              <a href="#">
-                                 <div class="d-inline-block ml-1">Rizal Fakhri</div>
-                              </a>
+                                 <div class="d-inline-block ml-1"><%= company.mission %></div>
                             </td>
                           </tr>
                           <% }); %>
