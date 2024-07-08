@@ -141,6 +141,34 @@ module.exports = {
     }
   },
 
+  createBlogCategory: async (req, res) => {
+    try {
+      const {
+        title,
+        token,
+      } = req.body;
+      const response = await axios.post(`${process.env.baseUrl}/admin/kategoriblog/create`, {
+        title,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        token,
+      }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 201) {
+          res.render('blog/add_blog_category', { successMessage: 'Blog category created successfully' });
+        } else {
+          res.render('blog/add_blog_category', { errorMessage: 'Failed to create blog category' });
+        }
+    } catch (error) {
+      res.render('blog/add_blog_category', { errorMessage: 'Error creating blog category' });
+    }
+  },
+
   viewBlogTag: async (req, res) => {
     let blogResponse = await axios.get(
       `${process.env.baseUrl}/admin/tagblog/get`
@@ -182,6 +210,34 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  createBlogTag: async (req, res) => {
+    try {
+      const {
+        title,
+        token,
+      } = req.body;
+      const response = await axios.post(`${process.env.baseUrl}/admin/tagblog/create`, {
+        title,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        token,
+      }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 201) {
+          res.render('blog/add_blog_tag', { successMessage: 'Blog tag created successfully' });
+        } else {
+          res.render('blog/add_blog_tag', { errorMessage: 'Failed to create blog tag' });
+        }
+    } catch (error) {
+      res.render('blog/add_blog_tag', { errorMessage: 'Error creating blog tag' });
     }
   },
 

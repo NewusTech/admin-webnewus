@@ -92,7 +92,6 @@
                             <th>Name</th>
                             <th>Title</th>
                             <th>Divisi</th>
-                            <th>Created At</th>
                           </tr>
                           <% teamData.forEach(function(team) { %>
                           <tr>
@@ -102,7 +101,7 @@
                                 <label for="checkbox-<%= team.id %>" class="custom-control-label">&nbsp;</label>
                               </div>
                             </td>
-                            <td><%= team.title %>
+                            <td><%= team.name %>
                               <div class="table-links">
                                 <a href="#">View</a>
                                 <div class="bullet"></div>
@@ -112,14 +111,11 @@
                               </div>
                             </td>
                             <td>
-                              <a href="#"><%= team.title %></a>,
+                              <%= team.title %>
                             </td>
                             <td>
-                              <a href="#">
-                                <img alt="image" src="<%= team.image %></td>" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1">Rizal Fakhri</div>
-                              </a>
+                              <%= team.description %>
                             </td>
-                            <td><%= team.createdAt %></td>
                           </tr>
                           <% }); %>
                         </table>

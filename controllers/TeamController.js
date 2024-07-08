@@ -3,17 +3,15 @@ const axios = require("axios");
 module.exports = {
 
   viewTeam : async (req, res) => {
-    try {
-      const teamResponse = await axios.get(`${process.env.baseUrl}/admin/team/lists`);
-      const teamData = Array.isArray(teamResponse.data) ? teamResponse.data : [];
-  
-      res.render('team/team', {
-        teamData,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('Terjadi kesalahan pada server');
-    }
+    let teamResponse = await axios.get(
+      `${process.env.baseUrl}/admin/team/lists`
+    );
+
+    let responseData = teamResponse.data;
+
+    res.render("team/team", {
+      teamData : responseData.data,
+    });
   },
 
   viewPostTeam: async (req, res) => {

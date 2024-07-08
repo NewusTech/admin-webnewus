@@ -60,16 +60,18 @@
                           <h4>Write Your Galeri</h4>
                         </div>
                         <div class="card-body">
+                          <form id="blogForm" enctype="multipart/form-data">
+                            <input type="hidden" id="tokenInput" name="token">
                           <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" name="title">
                             </div>
                           </div>
                           <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" name="description">
                             </div>
                           </div>
                           <div class="form-group row mb-4">
@@ -77,16 +79,17 @@
                             <div class="col-sm-12 col-md-7">
                               <div id="image-preview" class="image-preview">
                                 <label for="image-upload" id="image-label">Choose File</label>
-                                <input type="file" name="image" id="image-upload" />
+                            <input type="file" name="image" id="image-upload" required>
                               </div>
                             </div>
                           </div>
                           <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                             <div class="col-sm-12 col-md-7">
-                              <button class="btn btn-primary">Create Blog</button>
+                              <button class="btn btn-primary">Create Galeri</button>
                             </div>
                           </div>
+                        </form>
                         </div>
                       </div>
                     </div>
@@ -101,21 +104,85 @@
   
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
-  
-    <!-- JS Libraies -->
-    <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
-  
-    <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
-  
-    <!-- Page Specific JS File -->
-    <script src="../assets/js/page/features-posts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="../assets/js/stisla.js"></script>
+
+  <!-- JS Libraries -->
+  <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/features-posts.js"></script>
+  <!-- SweetAlert JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const token = localStorage.getItem('token');
+      document.getElementById('tokenInput').value = token;
+    });
+
+    document.getElementById('blogForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      Swal.fire({
+        title: 'Loading...',
+        text: 'Please wait!',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      });
+
+      const form = document.getElementById('blogForm');
+      const formData = new FormData(form);
+      const token = localStorage.getItem('token');
+
+      fetch('https://api-services.newus.id/api/admin/media/new-media', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return response.json().then(data => {
+              throw new Error(data.message || 'Failed to create galeri');
+            });
+          }
+        })
+        .then(data => {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Galeri created successfully.',
+            icon: 'success',
+          }).then(() => {
+            window.location.href = '/galeri';
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error creating galeri: ' + error.message,
+            icon: 'error',
+          });
+        });
+    });
+  </script>
   </body>
 
 </html>
