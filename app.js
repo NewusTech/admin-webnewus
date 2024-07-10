@@ -18,6 +18,7 @@ var messageRouter = require('./routes/message');
 var settingRouter = require('./routes/setting');
 var galeriRouter = require('./routes/galeri');
 var clientRouter = require('./routes/client');
+var testimonyRouter = require('./routes/testimony');
 
 var app = express();
 
@@ -49,6 +50,8 @@ app.use('/', messageRouter);
 app.use('/', settingRouter);
 app.use('/', galeriRouter);
 app.use('/', clientRouter);
+app.use('/', testimonyRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
