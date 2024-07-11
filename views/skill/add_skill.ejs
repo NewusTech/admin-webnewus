@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Create New Blog &mdash; Stisla</title>
+  <title>Create New Skill &mdash; Stisla</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
@@ -36,7 +36,7 @@
         <section class="section">
           <div class="section-header">
             <div class="section-header-back">
-              <a href="/blog" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+              <a href="" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1>Create New Skill</h1>
             <div class="section-header-breadcrumb">
@@ -141,7 +141,7 @@
       const formData = new FormData(form);
       const token = localStorage.getItem('token');
 
-      fetch(`${process.env.baseUrl}/admin/skill/new-skill`, {
+      fetch('https://api-services.newus.id/api/admin/skill/new-skill', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -160,7 +160,7 @@
         .then(data => {
           Swal.fire({
             title: 'Success!',
-            text: 'Service created successfully.',
+            text: 'Skill created successfully.',
             icon: 'success',
           }).then(() => {
             window.location.href = '/skill';
