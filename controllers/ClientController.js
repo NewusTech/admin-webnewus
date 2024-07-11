@@ -31,14 +31,14 @@ module.exports = {
       const { id } = req.params;
   
       // Panggil API dengan parameter id
-      const blogResponse = await axios.get(
+      const clientResponse = await axios.get(
         `${process.env.baseUrl}/admin/${id}/client/detail`
       );
   
-      const responseData = blogResponse.data;
+      const responseData = clientResponse.data;
   
       res.render("client/detail_client", {
-        blogData: responseData.data,
+        clientData: responseData.data,
       });
     } catch (error) {
       console.error(error);
