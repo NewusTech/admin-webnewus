@@ -16,13 +16,13 @@ module.exports = {
 
   viewPostTeam: async (req, res) => {
     let teamResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+      `${process.env.baseUrl}/admin/divitioncategory/lists`
     );
 
-    let teamData = teamResponse.data;
+    let responseData = teamResponse.data;
 
     res.render("team/add_team", {
-      teamData,
+      teamData : responseData.data,
     });
   },
 
