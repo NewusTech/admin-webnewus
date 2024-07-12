@@ -48,7 +48,7 @@ module.exports = {
 
   viewTeamCategory: async (req, res) => {
     let teamResponse = await axios.get(
-     `${process.env.baseUrl}/admin/divitioncategory/lists`
+      `${process.env.baseUrl}/admin/divitioncategory/lists`
     );
 
     let responseData = teamResponse.data;
