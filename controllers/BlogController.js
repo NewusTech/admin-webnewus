@@ -17,13 +17,19 @@ module.exports = {
 
   viewPostBlog: async (req, res) => {
     let blogResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+      `${process.env.baseUrl}/admin/kategoriblog/get`
     );
 
-    let blogData = blogResponse.data;
+    let tagResponse = await axios.get(
+      `${process.env.baseUrl}/admin/tagblog/get`
+    );
+
+    let responseData = blogResponse.data;
+    let responseDataTag = tagResponse.data;
 
     res.render("blog/add_blog", {
-      blogData,
+      blogData : responseData.data,
+      tagData : responseDataTag.data,
     });
   },
 
