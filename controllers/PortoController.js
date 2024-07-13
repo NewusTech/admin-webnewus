@@ -114,7 +114,6 @@ module.exports = {
     });
   },
 
-  
   viewPostPortofolioCategory: async (req, res) => {
     let portofolioResponse = await axios.get(
       "https://jsonplaceholder.typicode.com/posts"
@@ -144,6 +143,34 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  createPortofolioCategory: async (req, res) => {
+    try {
+      const {
+        title,
+        token,
+      } = req.body;
+      const response = await axios.post(`${process.env.baseUrl}/admin/kategoriportofolio/create`, {
+        title,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        token,
+      }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 201) {
+          res.render('portofolio/add_portofolio_category', { successMessage: 'Portofolio category created successfully' });
+        } else {
+          res.render('portofolio/add_portofolio_category', { errorMessage: 'Failed to create portofolio category' });
+        }
+    } catch (error) {
+      res.render('portofolio/add_portofolio_category', { errorMessage: 'Error creating portofolio category' });
     }
   },
 
@@ -188,6 +215,34 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  createPortofolioTag: async (req, res) => {
+    try {
+      const {
+        title,
+        token,
+      } = req.body;
+      const response = await axios.post(`${process.env.baseUrl}/admin/tagportofolio/create`, {
+        title,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        token,
+      }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 201) {
+          res.render('portofolio/add_portofolio_tag', { successMessage: 'Portofolio tag created successfully' });
+        } else {
+          res.render('portofolio/add_portofolio_tag', { errorMessage: 'Failed to create portofolio tag' });
+        }
+    } catch (error) {
+      res.render('portofolio/add_portofolio_tag', { errorMessage: 'Error creating portofolio tag' });
     }
   },
 };

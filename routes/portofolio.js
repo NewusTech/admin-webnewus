@@ -8,10 +8,12 @@ router.get('/portofolio/detail/:slug', portoControllers.viewPostPortofolio);
 
 router.get('/portofolio/category', portoControllers.viewPortofolioCategory);
 router.get('/portofolio/category/create', portoControllers.viewPostPortofolioCategory);
+router.post('/portofolio/category/create', portoControllers.createPortofolioCategory);
 router.get('/portofolio/category/detail/:id', portoControllers.detailPortofolioCategory);
 
 router.get('/portofolio/tag', portoControllers.viewPortofolioTag);
 router.get('/portofolio/tag/create', portoControllers.viewPostPortofolioTag);
+router.post('/portofolio/tag/create', portoControllers.createPortofolioTag);
 router.get('/portofolio/tag/detail/:id', portoControllers.detailPortofolioTag);
 
 module.exports = router;

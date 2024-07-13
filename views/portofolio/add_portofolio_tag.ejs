@@ -42,15 +42,15 @@
                   <h1>Create New Tag Portofolio</h1>
                   <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Posts</a></div>
-                    <div class="breadcrumb-item">Create New Post</div>
+                    <div class="breadcrumb-item"><a href="#">Tag Portofolio</a></div>
+                    <div class="breadcrumb-item">Create New Tag</div>
                   </div>
                 </div>
       
                 <div class="section-body">
                   <h2 class="section-title">New Tag Portofolio</h2>
                   <p class="section-lead">
-                    On this page you can create a tag portofolio and fill in all fields.
+                    On this page you can create a tag portfolio and fill in all fields.
                   </p>
       
                   <div class="row">
@@ -60,10 +60,12 @@
                           <h4>Write Your Tag</h4>
                         </div>
                         <div class="card-body">
+                          <form action="/portofolio/tag/create" method="POST">
+                            <input type="hidden" id="tokenInput" name="token">
                           <div class="form-group row mb-4">
                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                             <div class="col-sm-12 col-md-7">
-                              <input type="text" class="form-control">
+                              <input type="text" class="form-control" name="title">
                             </div>
                           </div>
                           <div class="form-group row mb-4">
@@ -72,6 +74,7 @@
                               <button class="btn btn-primary">Create Tag</button>
                             </div>
                           </div>
+                          </form>
                         </div>
                       </div>
                     </div>
@@ -98,9 +101,38 @@
     <!-- Template JS File -->
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
     <!-- Page Specific JS File -->
     <script src="../assets/js/page/features-posts.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const token = localStorage.getItem('token');
+        document.getElementById('tokenInput').value = token;
+      });
+
+      // Fungsi untuk menampilkan notifikasi
+      function showNotification(type, title, text) {
+        Swal.fire({
+          icon: type,
+          title: title,
+          text: text,
+          didClose: () => {
+            if (type === 'success') {
+              window.location.href = '/portofolio/tag';
+            }
+          }
+        });
+      }
+
+      // Cek apakah ada pesan sukses atau error dari server
+      <% if (typeof successMessage !== 'undefined') { %>
+        showNotification('success', 'Success', '<%= successMessage %>');
+      <% } %>
+      <% if (typeof errorMessage !== 'undefined') { %>
+        showNotification('error', 'Error', '<%= errorMessage %>');
+      <% } %>
+    </script>
   </body>
 
 </html>
