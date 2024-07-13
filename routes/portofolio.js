@@ -3,6 +3,7 @@ const portoControllers = require("../controllers/PortoController");
 
 router.get('/portofolio', portoControllers.viewPortofolio);
 router.get('/portofolio/create', portoControllers.viewPostPortofolio);
+router.post('/portofolio/create', portoControllers.createPortofolio);
 router.get('/portofolio/detail/:slug', portoControllers.viewPostPortofolio);
 
 router.get('/portofolio/category', portoControllers.viewPortofolioCategory);

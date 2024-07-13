@@ -36,44 +36,21 @@
         <div class="main-content">
           <section class="section">
             <div class="section-header">
-              <h1>Blog</h1>
+              <h1>Portofolio</h1>
               <div class="section-header-button">
-                <a href="/blog/create" class="btn btn-primary">Add New</a>
+                <a href="/portofolio/create" class="btn btn-primary">Add New</a>
               </div>
               <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="#">Kelola Blog</a></div>
-                <div class="breadcrumb-item">Blog</div>
+                <div class="breadcrumb-item"><a href="#">Kelola Portofolio</a></div>
+                <div class="breadcrumb-item">Portofolio</div>
               </div>
             </div>
             <div class="section-body">
-              <h2 class="section-title">Blog</h2>
+              <h2 class="section-title">Portofolio</h2>
               <p class="section-lead">
-                You can manage all blogs, such as editing, deleting and more.
+                You can manage all portofolio, such as editing, deleting and more.
               </p>
-  
-              <div class="row">
-                <div class="col-12">
-                  <div class="card mb-0">
-                    <div class="card-body">
-                      <ul class="nav nav-pills">
-                        <li class="nav-item">
-                          <a class="nav-link active" href="#">All <span class="badge badge-white">5</span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Draft <span class="badge badge-primary">1</span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Pending <span class="badge badge-primary">1</span></a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Trash <span class="badge badge-primary">0</span></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="row mt-4">
                 <div class="col-12">
                   <div class="card">
@@ -112,10 +89,10 @@
                               </div>
                             </th>
                             <th>Title</th>
-                            <th>Category</th>
-                            <th>Author</th>
-                            <th>Created At</th>
-                            <th>Status</th>
+                            <th>Body</th>
+                            <th>Kategori Portofolio</th>
+                            <th>Keyword</th>
+                            <th>Tahun Portofolio</th>
                           </tr>
                           <% portofolioData.forEach(function(portofolio) { %>
                             <tr>
@@ -134,13 +111,13 @@
                                         <a href="#" class="text-danger">Trash</a>
                                     </div>
                                 </td>
-                                <td><a href="#"><%= portofolio.title %></a></td>
-                                <td><a href="#"><img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1"><%= portofolio.title %></div></a></td>
-                                <td><%= portofolio.createdAt %></td>
+                                <td><%= portofolio.body %></td>
+                                <td><%= portofolio.keyword %></td>portfolioYear
                                 <td><div class="badge badge-primary"><%= portofolio.title %></div></td>
+                                <td><%= portofolio.portfolioYear %></td>
                             </tr>
                             <% }); %>
-                          
+
                         </table>
                       </div>
                       <div class="float-right">
