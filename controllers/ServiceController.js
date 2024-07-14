@@ -57,7 +57,7 @@ module.exports = {
       formData.append("description", req.body.description);
       formData.append("image", imageFile.data, imageFile.name);
       formData.append("createdAt", new Date().toISOString());
-      formData.append("updatedAt", new Date().toISOString());
+      formData.append("serviceAt", new Date().toISOString());
 
       const response = await axios.post(
         `${process.env.baseUrl}/admin/blog/create`,
@@ -80,5 +80,44 @@ module.exports = {
       res.render('service/add_service', { errorMessage: 'Error creating service' });
     }
   },
+
+  viewUpdateService: async (req, res) => {
+    try {
+      const id = req.params.id;
+      let serviceResponse = await axios.get(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      let responseData = serviceResponse.data;
+
+      res.render("service/edit_service", {
+        serviceData: responseData.data,
+      });
+    } catch (error) {
+      console.error('Error fetching service data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+
+  updateService: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const serviceData = req.body;
+
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/service/update`,
+        serviceData
+      );
+
+      if (updateResponse.status === 200) {
+        res.redirect('/service');
+      } else {
+        res.status(400).send('Failed to update service data');
+      }
+    } catch (error) {
+      console.error('Error updating service data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
   
+
 };
