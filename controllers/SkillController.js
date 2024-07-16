@@ -79,5 +79,46 @@ module.exports = {
       res.render('skill/add_skill', { errorMessage: 'Error creating skill' });
     }
   },
+
+  viewUpdateSkill: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const skillResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/skill/detail`
+      );
+  
+      const responseData = skillResponse.data;
+  
+      res.render("skill/edit_skill", {
+        skillData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateSkill: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const skillData = req.body;
+
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/skill/update`,
+        skillData
+      );
+
+      if (updateResponse.status === 200) {
+        res.redirect('/skill');
+      } else {
+        res.status(400).send('Failed to update skill data');
+      }
+    } catch (error) {
+      console.error('Error updating skill data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
   
 };
