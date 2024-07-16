@@ -104,7 +104,7 @@ module.exports = {
   
   viewBlogCategory: async (req, res) => {
     let blogResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
+      `${process.env.baseUrl}/admin/kategoriblog/get`
     );
 
     let responseData = blogResponse.data;
