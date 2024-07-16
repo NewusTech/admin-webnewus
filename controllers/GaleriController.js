@@ -47,4 +47,45 @@ module.exports = {
     }
   },
 
+  viewUpdateGaleri: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const galeriResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/media/detail`
+      );
+  
+      const responseData = galeriResponse.data;
+  
+      res.render("galeri/edit_galeri", {
+        galeriData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateGaleri: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const galeriData = req.body;
+
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/media/update`,
+        galeriData
+      );
+
+      if (updateResponse.status === 200) {
+        res.redirect('/galeri');
+      } else {
+        res.status(400).send('Failed to update galeri data');
+      }
+    } catch (error) {
+      console.error('Error updating galeri data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+
 };
