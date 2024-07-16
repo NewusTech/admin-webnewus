@@ -83,18 +83,21 @@ module.exports = {
 
   viewUpdateService: async (req, res) => {
     try {
-      const id = req.params.id;
-      let serviceResponse = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter slug
+      const serviceResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/service/detail`
       );
-      let responseData = serviceResponse.data;
-
+  
+      const responseData = serviceResponse.data;
+  
       res.render("service/edit_service", {
         serviceData: responseData.data,
       });
     } catch (error) {
-      console.error('Error fetching service data:', error);
-      res.status(500).send('Internal Server Error');
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
     }
   },
 
