@@ -9,6 +9,9 @@ router.get('/blog/category', blogControllers.viewBlogCategory);
 router.get('/blog/category/create', blogControllers.viewPostBlogCategory);
 router.get('/admin/kategoriblog/get/:id', blogControllers.detailBlogCategory);
 router.post('/blog/category/create', blogControllers.createBlogCategory);
+router.get('/admin/:id/blog/category', blogControllers.viewUpdateBlogCategory);
+router.post('/admin/:id/blog/category/update', blogControllers.updateBlogCategory);
+
 
 router.get('/blog/tag', blogControllers.viewBlogTag);
 router.get('/blog/tag/create', blogControllers.viewPostBlogTag);

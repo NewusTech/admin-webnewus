@@ -32,7 +32,6 @@ module.exports = {
       tagData : responseDataTag.data,
     });
   },
-
   
   detailBlog: async (req, res) => {
     try {
@@ -173,6 +172,63 @@ module.exports = {
       res.render('blog/add_blog_category', { errorMessage: 'Error creating blog category' });
     }
   },
+
+  viewUpdateBlogCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const blogResponse = await axios.get(
+        `${process.env.baseUrl}/admin/kategoriblog/get/${id}`
+      );
+  
+      const responseData = blogResponse.data;
+  
+      res.render("blog/edit_blog_category", {
+        blogData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateBlogCategory: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { title, token } = req.body;
+  
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/kategoriblog/update/${id}`,
+        { title },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+  
+      if (updateResponse.status === 200) {
+        res.render('blog/edit_blog_category', {
+          successMessage: 'Category updated successfully',
+          blogData: updateResponse.data.data 
+        });
+      } else {
+        res.render('blog/edit_blog_category', {
+          errorMessage: 'Failed to update category',
+          blogData: req.body
+        });
+      }
+    } catch (error) {
+      console.error('Error updating category:', error.message);
+      res.render('blog/edit_blog_category', {
+        errorMessage: 'Internal Server Error',
+        blogData: req.body
+      });
+    }
+  },
+  
 
   viewBlogTag: async (req, res) => {
     let blogResponse = await axios.get(
