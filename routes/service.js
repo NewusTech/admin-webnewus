@@ -6,7 +6,7 @@ router.get('/service/create', serviceControllers.viewPostService);
 router.post('/service/create', serviceControllers.createService);
 router.get('/admin/:id/service/detail', serviceControllers.detailService);
 router.get('/admin/:id/service/update', serviceControllers.viewUpdateService);
-// router.post('/admin/:id/service', serviceControllers.updateService);
+router.post('/admin/:id/service', serviceControllers.updateService);
 
 
 module.exports = router;
