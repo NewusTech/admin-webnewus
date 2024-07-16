@@ -15,17 +15,57 @@ module.exports = {
     });
   },
 
-    
   viewPostInternRecruitment: async (req, res) => {
-    let internrecruitmentcategoryResponse = await axios.get(
+    let internrecruitmentResponse = await axios.get(
       "https://jsonplaceholder.typicode.com/posts"
     );
 
-    let internrecruitmentcategoryData = internrecruitmentcategoryResponse.data;
+    let internrecruitmentData = internrecruitmentResponse.data;
 
     res.render("internrecruit/add_intern", {
-      internrecruitmentcategoryData,
+      internrecruitmentData,
     });
+  },
+
+  viewUpdateInternRecruitment: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const internrecruitmentResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/internrecruitment/detail`
+      );
+  
+      const responseData = internrecruitmentResponse.data;
+  
+      res.render("internrecruit/edit_intern", {
+        internrecruitmentData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateInternRecruitment: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const internrecruitmentData = req.body;
+
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/internrecruitment/update`,
+        internrecruitmentData
+      );
+
+      if (updateResponse.status === 200) {
+        res.redirect('/intern');
+      } else {
+        res.status(400).send('Failed to update intern recruitment data');
+      }
+    } catch (error) {
+      console.error('Error updating intern recruitment data:', error);
+      res.status(500).send('Internal Server Error');
+    }
   },
 
 };
