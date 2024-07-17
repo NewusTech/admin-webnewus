@@ -229,7 +229,6 @@ module.exports = {
     }
   },
   
-
   viewBlogTag: async (req, res) => {
     let blogResponse = await axios.get(
       `${process.env.baseUrl}/admin/tagblog/get`
@@ -299,6 +298,62 @@ module.exports = {
         }
     } catch (error) {
       res.render('blog/add_blog_tag', { errorMessage: 'Error creating blog tag' });
+    }
+  },
+
+  viewUpdateBlogTag: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const blogResponse = await axios.get(
+        `${process.env.baseUrl}/admin/tagblog/get/${id}`
+      );
+  
+      const responseData = blogResponse.data;
+  
+      res.render("blog/edit_blog_tag", {
+        blogData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateBlogTag: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { title, token } = req.body;
+  
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/tagblog/update/${id}`,
+        { title },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+  
+      if (updateResponse.status === 200) {
+        res.render('blog/edit_blog_tag', {
+          successMessage: 'Tag updated successfully',
+          blogData: updateResponse.data.data 
+        });
+      } else {
+        res.render('blog/edit_blog_tag', {
+          errorMessage: 'Failed to update tag',
+          blogData: req.body
+        });
+      }
+    } catch (error) {
+      console.error('Error updating tag:', error.message);
+      res.render('blog/edit_blog_tag', {
+        errorMessage: 'Internal Server Error',
+        blogData: req.body
+      });
     }
   },
 

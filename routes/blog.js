@@ -17,6 +17,8 @@ router.get('/blog/tag', blogControllers.viewBlogTag);
 router.get('/blog/tag/create', blogControllers.viewPostBlogTag);
 router.get('/admin/tagblog/get/:id', blogControllers.detailBlogTag);
 router.post('/blog/tag/create', blogControllers.createBlogTag);
+router.get('/admin/:id/blog/tag', blogControllers.viewUpdateBlogTag);
+router.post('/admin/:id/blog/tag/update', blogControllers.updateBlogTag);
 
 router.post('/blogggg', blogControllers.createBlog);
 
