@@ -76,9 +76,6 @@
                           </div>
                         </form>
                       </div>
-  
-                      <div class="clearfix mb-3"></div>
-  
                       <div class="table-responsive">
                         <table class="table table-striped">
                           <tr>
@@ -92,7 +89,6 @@
                             <th>Body</th>
                             <th>Kategori Portofolio</th>
                             <th>Keyword</th>
-                            <th>Tahun Portofolio</th>
                           </tr>
                           <% portofolioData.forEach(function(portofolio) { %>
                             <tr>
@@ -106,15 +102,14 @@
                                     <div class="table-links">
                                       <a href=" /portofolio/detail/<%= portofolio.slug %>">View</a>
                                         <div class="bullet"></div>
-                                        <a href="#">Edit</a>
+                                        <a href="/admin/<%= portofolio.slug %>/portfolio/update">Edit</a>
                                         <div class="bullet"></div>
                                         <a href="#" class="text-danger">Trash</a>
                                     </div>
                                 </td>
                                 <td><%= portofolio.body %></td>
-                                <td><%= portofolio.keyword %></td>portfolioYear
+                                <td><%= portofolio.keyword %></td>
                                 <td><div class="badge badge-primary"><%= portofolio.title %></div></td>
-                                <td><%= portofolio.portfolioYear %></td>
                             </tr>
                             <% }); %>
 

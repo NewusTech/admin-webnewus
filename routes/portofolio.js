@@ -5,6 +5,8 @@ router.get('/portofolio', portoControllers.viewPortofolio);
 router.get('/portofolio/create', portoControllers.viewPostPortofolio);
 router.post('/portofolio/create', portoControllers.createPortofolio);
 router.get('/portofolio/detail/:slug', portoControllers.viewPostPortofolio);
+router.get('/admin/:slug/portfolio/update', portoControllers.viewUpdatePortofolio);
+router.post('/admin/:id/portfolio', portoControllers.updatePortofolio);
 
 router.get('/portofolio/category', portoControllers.viewPortofolioCategory);
 router.get('/portofolio/category/create', portoControllers.viewPostPortofolioCategory);

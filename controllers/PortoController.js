@@ -102,6 +102,57 @@ module.exports = {
     }
   },
 
+  viewUpdatePortofolio: async (req, res) => {
+    try {
+      const { slug } = req.params;
+  
+      // Panggil API dengan parameter slug
+      const portofolioResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${slug}/portfolio/detail`
+      );
+      const portofoliocategoryResponse = await axios.get(
+        `${process.env.baseUrl}/admin/kategoriportofolio/get`
+      );
+      const tagResponse = await axios.get(
+        `${process.env.baseUrl}/admin/tagportofolio/get`
+      );
+  
+      const responseData = portofolioResponse.data;
+      const responseDataCategory = portofoliocategoryResponse.data;
+      const responseDataTag = tagResponse.data;
+  
+      res.render("portofolio/edit_portofolio", {
+        portofolioData: responseData.portfolio,
+        portofoliocategoryData: responseDataCategory.data,
+        tagData : responseDataTag.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updatePortofolio: async (req, res) => {
+    try {
+      const slug = req.params.slug;
+      const portofolioData = req.body;
+
+      let portofolioResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${slug}/portfolio/detail`,
+        portofolioData
+      );
+
+      if (portofolioResponse.status === 200) {
+        res.redirect('/portofolio');
+      } else {
+        res.status(400).send('Failed to portofolio portofolio data');
+      }
+    } catch (error) {
+      console.error('Error updating portofolio data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+
   viewPortofolioCategory: async (req, res) => {
     let portofolioResponse = await axios.get(
       `${process.env.baseUrl}/admin/kategoriportofolio/get`
