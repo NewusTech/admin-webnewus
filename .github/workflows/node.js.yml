@@ -26,6 +26,6 @@ jobs:
     - run: yarn install
     - name : change repo
       run : cd /home/newus-admin/htdocs/admin.newus.id/actions-runner/_work/admin-webnewus/admin-webnewus
-    - run : pm2 restart 78
+    - run : pm2 restart admin.newus.id
       
     
