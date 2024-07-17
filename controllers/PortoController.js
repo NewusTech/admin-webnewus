@@ -301,4 +301,60 @@ module.exports = {
       res.render('portofolio/add_portofolio_tag', { errorMessage: 'Error creating portofolio tag' });
     }
   },
+
+  viewUpdatePortofolioTag: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const portofolioResponse = await axios.get(
+        `${process.env.baseUrl}/admin/tagportofolio/get/${id}`
+      );
+  
+      const responseData = portofolioResponse.data;
+  
+      res.render("portofolio/edit_portofolio_tag", {
+        portofolioData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updatePortofolioTag: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { title, token } = req.body;
+  
+      let portofolioResponse = await axios.put(
+        `${process.env.baseUrl}/admin/tagportofolio/update/${id}`,
+        { title },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+  
+      if (portofolioResponse.status === 200) {
+        res.render('portofolio/edit_portofolio_tag', {
+          successMessage: 'Tag updated successfully',
+          portofolioData: portofolioResponse.data.data 
+        });
+      } else {
+        res.render('portofolio/edit_portofolio_tag', {
+          errorMessage: 'Failed to updated portofolio tag',
+          portofolioData: req.body
+        });
+      }
+    } catch (error) {
+      console.error('Error updating tag:', error.message);
+      res.render('portofolio/edit_portofolio_tag', {
+        errorMessage: 'Internal Server Error',
+        portofolioData: req.body
+      });
+    }
+  },
 };
