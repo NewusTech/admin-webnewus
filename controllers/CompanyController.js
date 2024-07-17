@@ -14,7 +14,6 @@ module.exports = {
     });
   },
 
-
   viewPostCompany: async (req, res) => {
     let companyResponse = await axios.get(
       "https://jsonplaceholder.typicode.com/posts"
@@ -76,6 +75,62 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  viewUpdateCompany: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const companyResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/aboutcompany/detail`
+      );
+  
+      const responseData = companyResponse.data;
+  
+      res.render("company/edit_company", {
+        companyData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateCompany: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { body, vision, mission, address, email, phoneNumber, siteTitle, siteDescription, footerDescription, token } = req.body;
+  
+      let companyResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/aboutcompany/update`,
+        { title, body, vision, mission, address, email, phoneNumber, siteTitle, siteDescription, footerDescription },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+  
+      if (companyResponse.status === 200) {
+        res.render('company/edit_company', {
+          successMessage: 'Company updated successfully',
+          companyData: companyResponse.data.data 
+        });
+      } else {
+        res.render('company/edit_company', {
+          errorMessage: 'Failed to company',
+          companyData: req.body
+        });
+      }
+    } catch (error) {
+      console.error('Error updating company:', error.message);
+      res.render('company/edit_company', {
+        errorMessage: 'Internal Server Error',
+        companyData: req.body
+      });
     }
   },
   

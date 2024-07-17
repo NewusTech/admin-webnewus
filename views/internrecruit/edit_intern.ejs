@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Edit Intern Recruitment &mdash; Stisla</title>
+  <title>Edit Recruitment &mdash; Stisla</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
@@ -16,6 +16,7 @@
 
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -36,18 +37,18 @@
       <section class="section">
         <div class="section-header">
           <div class="section-header-back">
-            <a href="/internrecruitment" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            <a href="/recruitment" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
           <h1>Edit Intern Recruitment</h1>
           <div class="section-header-breadcrumb">
             <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-            <div class="breadcrumb-item"><a href="#">Intern Recruitment</a></div>
-            <div class="breadcrumb-item">Edit Intern</div>
+            <div class="breadcrumb-item"><a href="#">Inter Recruitment</a></div>
+            <div class="breadcrumb-item">Edit Recruitment</div>
           </div>
         </div>
 
         <div class="section-body">
-          <h2 class="section-title">Edit Intern Recruitment</h2>
+          <h2 class="section-title">Edit Recruitment</h2>
           <p class="section-lead">
             On this page you can edit intern recruitment and fill in all fields.
           </p>
@@ -56,15 +57,15 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4>Update Your Intern</h4>
+                  <h4>Update Your Recruitment</h4>
                 </div>
                 <div class="card-body">
-                  <form id="internrecruitForm" enctype="multipart/form-data">
+                  <form id="internrecruitmentForm" enctype="multipart/form-data">
                     <input type="hidden" id="tokenInput" name="token">
                     <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control" name="title" value="<%=internrecruitmentData.title %>">
+                        <textarea name="description" id="description"><%= internrecruitmentData.description %></textarea>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
@@ -72,12 +73,12 @@
                       <div class="col-sm-12 col-md-7">
                         <div id="image-preview" class="image-preview">
                           <label for="image-upload" id="image-label">Choose File</label>
-                          <input type="file" name="image" id="image-upload">
+                          <input type="file" name="coverLetter" id="image-upload">
                         </div>
                         <br>
                         <label>Previous Image URL:</label>
                         <br>
-                        <img src="<%= internrecruitmentData.image %>" alt="Previous Image" width="100">
+                        <img src="<%= internrecruitmentData.coverLetter %>" alt="Previous Image" width="100">
                         <br>
                       </div>
                     </div>
@@ -85,7 +86,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
-                        <button type="submit" class="btn btn-primary">Update Intern</button>
+                        <button type="submit" class="btn btn-primary">Update Recruitment</button>
                       </div>
                     </div>
                   </form>
@@ -128,11 +129,14 @@
     document.addEventListener('DOMContentLoaded', function () {
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;
+  
+      // Inisialisasi CKEditor pada textarea description
+      CKEDITOR.replace('description');
     });
-
-    document.getElementById('internrecruitForm').addEventListener('submit', function (event) {
+  
+    document.getElementById('internrecruitmentForm').addEventListener('submit', function (event) {
       event.preventDefault();
-
+  
       Swal.fire({
         title: 'Loading...',
         text: 'Please wait!',
@@ -141,11 +145,11 @@
           Swal.showLoading()
         }
       });
-
-      const form = document.getElementById('internrecruitForm');
+  
+      const form = document.getElementById('internrecruitmentForm');
       const formData = new FormData(form);
       const token = localStorage.getItem('token');
-
+  
       fetch(`https://api-services.newus.id/api/admin/<%=internrecruitmentData.id %>/internrecruitment/update`, {
         method: 'PUT',
         headers: {
@@ -158,29 +162,30 @@
             return response.json();
           } else {
             return response.json().then(data => {
-              throw new Error(data.message || 'Failed to update intern recruitment');
+              throw new Error(data.message || 'Failed to update recruitment');
             });
           }
         })
         .then(data => {
           Swal.fire({
             title: 'Success!',
-            text: 'Intern recruitment updated successfully.',
+            text: 'Recruitment updated successfully.',
             icon: 'success',
           }).then(() => {
-            window.location.href = '/intern';
+            window.location.href = '/intern-recruit';
           });
         })
         .catch(error => {
           console.error('Error:', error);
           Swal.fire({
             title: 'Error!',
-            text: 'Error updating intern recruitment: ' + error.message,
+            text: 'Error updating recruitment: ' + error.message,
             icon: 'error',
           });
         });
     });
   </script>
+  
 </body>
 
 </html>
