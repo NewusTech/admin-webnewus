@@ -174,6 +174,62 @@ module.exports = {
     }
   },
 
+  viewUpdatePortofolioCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const portofolioResponse = await axios.get(
+        `${process.env.baseUrl}/admin/kategoriportofolio/get/${id}`
+      );
+  
+      const responseData = portofolioResponse.data;
+  
+      res.render("portofolio/edit_portofolio_category", {
+        portofolioData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updatePortofolioCategory: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { title, token } = req.body;
+  
+      let portofolioResponse = await axios.put(
+        `${process.env.baseUrl}/admin/kategoriportofolio/update/${id}`,
+        { title },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+  
+      if (portofolioResponse.status === 200) {
+        res.render('portofolio/edit_portofolio_category', {
+          successMessage: 'Category updated successfully',
+          portofolioData: portofolioResponse.data.data 
+        });
+      } else {
+        res.render('portofolio/edit_portofolio_category', {
+          errorMessage: 'Failed to updated portofolio category',
+          portofolioData: req.body
+        });
+      }
+    } catch (error) {
+      console.error('Error updating category:', error.message);
+      res.render('portofolio/edit_portofolio_category', {
+        errorMessage: 'Internal Server Error',
+        portofolioData: req.body
+      });
+    }
+  },
+
   viewPortofolioTag: async (req, res) => {
     let portofolioResponse = await axios.get(
       `${process.env.baseUrl}/admin/tagportofolio/get`
