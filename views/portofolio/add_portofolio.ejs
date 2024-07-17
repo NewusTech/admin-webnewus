@@ -122,8 +122,8 @@
                         <label class="form-control-label col-sm-3 text-md-right">Logo</label>
                         <div class="col-sm-12 col-md-7">
                           <div class="custom-file">
-                            <input type="file" name="logo" class="custom-file-input" id="image-upload">
-                            <label class="custom-file-label" for="image-upload" id="image-label">Choose File</label>
+                            <input type="file" name="logo" class="custom-file-input" id="logo">
+                            <label class="custom-file-label" for="logo">Choose File</label>
                           </div>
                           <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                         </div>
@@ -144,8 +144,8 @@
                         <label class="form-control-label col-sm-3 text-md-right">Image</label>
                         <div class="col-sm-12 col-md-7">
                           <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="image-upload">
-                            <label class="custom-file-label" for="image-upload" id="image-label">Choose File</label>
+                            <input type="file" name="image" class="custom-file-input" id="image">
+                            <label class="custom-file-label" for="image">Choose File</label>
                           </div>
                           <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                         </div>
@@ -170,9 +170,7 @@
 
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
@@ -198,76 +196,82 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      $('#logo').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName);
+      });
+
+      $('#image').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName);
+      });
+
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;
     });
 
     document.getElementById('portofolioForm').addEventListener('submit', function (event) {
-  event.preventDefault();
+      event.preventDefault();
 
-  Swal.fire({
-    title: 'Loading...',
-    text: 'Please wait!',
-    allowOutsideClick: false,
-    didOpen: () => {
-      Swal.showLoading()
-    }
-  });
-
-  // Sinkronisasi konten CKEditor dengan textarea asli
-  for (instance in CKEDITOR.instances) {
-    CKEDITOR.instances[instance].updateElement();
-  }
-
-  const form = document.getElementById('portofolioForm');
-  const formData = new FormData(form);
-  const token = localStorage.getItem('token');
-
-  fetch('https://api-services.newus.id/api/admin/portfolio/new', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    },
-    body: formData
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return response.json().then(data => {
-          throw new Error(data.message || 'Failed to create portofolio');
-        });
-      }
-    })
-    .then(data => {
       Swal.fire({
-        title: 'Success!',
-        text: 'Portofolio created successfully.',
-        icon: 'success',
-      }).then(() => {
-        window.location.href = '/portofolio';
+        title: 'Loading...',
+        text: 'Please wait!',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
       });
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      Swal.fire({
-        title: 'Error!',
-        text: 'Error creating portofolio: ' + error.message,
-        icon: 'error',
+
+      // Sinkronisasi konten CKEditor dengan textarea asli
+      for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+      }
+
+      const form = document.getElementById('portofolioForm');
+      const formData = new FormData(form);
+      const token = localStorage.getItem('token');
+
+      fetch('https://api-services.newus.id/api/admin/portfolio/new', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.message || 'Failed to create portofolio');
+          });
+        }
+      })
+      .then(data => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Portofolio created successfully.',
+          icon: 'success',
+        }).then(() => {
+          window.location.href = '/portofolio';
+        });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error creating portofolio: ' + error.message,
+          icon: 'error',
+        });
       });
     });
-});
 
+    function generateSlug() {
+      const title = document.getElementById('titleInput').value.trim().toLowerCase();
+      const slug = title.replace(/\s+/g, '-');
+      document.getElementById('slugInput').value = slug;
+    }
   </script>
 
-<script>
-  function generateSlug() {
-    const title = document.getElementById('titleInput').value.trim().toLowerCase();
-    const slug = title.replace(/\s+/g, '-');
-    document.getElementById('slugInput').value = slug;
-  }
-</script>
-
 </body>
-
 </html>
