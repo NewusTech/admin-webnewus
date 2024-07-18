@@ -30,7 +30,7 @@ jobs:
     - run: yarn install
     - name : change repo
       run : cd /home/newus-admin/htdocs/admin.newus.id/actions-runner/_work/admin-webnewus/admin-webnewus
-    - run : pm2 stop admin.newus.id
+    - run : pm2 restart admin.newus.id
     - run : systemctl restart nginx
       
     
