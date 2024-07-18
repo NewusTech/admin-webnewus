@@ -38,5 +38,28 @@ module.exports = {
     });
   },
 
+  viewHistoryIntern: async (req, res) => {
+    let historyResponse = await axios.get(
+      `${process.env.baseUrl}/admin/internhistory/lists`,
+    );
+
+    let responseData = historyResponse.data;
+
+    res.render("history/history_intern", {
+      historyData : responseData.data,
+    });
+  },
+
+  viewPostHistoryIntern: async (req, res) => {
+    let historyResponse = await axios.get(
+      `${process.env.baseUrl}/admin/internhistory/new-history`
+    );
+    let responseData = historyResponse.data;
+
+    res.render("history/history_job", {
+      historyData : responseData.data,
+    });
+  },
+
   
 };
