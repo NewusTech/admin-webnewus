@@ -248,7 +248,7 @@
             const formData = new FormData(form);
             const token = localStorage.getItem('token');
 
-            fetch(`https://api-services.newus.id/api/admin/<%=portofolioData.slug %>/portfolio/update/`, {
+            fetch(`https://api-services.newus.id/api/admin/<%=portofolioData.id %>/portfolio/update/`, {
                 method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${token}`

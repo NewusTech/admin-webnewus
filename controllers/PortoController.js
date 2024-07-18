@@ -134,11 +134,11 @@ module.exports = {
 
   updatePortofolio: async (req, res) => {
     try {
-      const slug = req.params.slug;
+      const id = req.params.id;
       const portofolioData = req.body;
 
       let portofolioResponse = await axios.put(
-        `${process.env.baseUrl}/admin/${slug}/portfolio/detail`,
+        `${process.env.baseUrl}/admin/${id}/portfolio/detail`,
         portofolioData
       );
 

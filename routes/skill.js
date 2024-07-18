@@ -7,5 +7,6 @@ router.post('/skill/create', skillControllers.createSkill);
 router.get('/admin/:id/skill/detail', skillControllers.detailSkill);
 router.get('/admin/:id/skill/update', skillControllers.viewUpdateSkill);
 router.post('/admin/:id/skill', skillControllers.updateSkill);
+router.delete('/admin/:id/skill/delete', skillControllers.deleteSkill);
 
 module.exports = router;
