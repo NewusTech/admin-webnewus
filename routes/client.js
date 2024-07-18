@@ -6,6 +6,7 @@ router.get('/client/create', clientControllers.viewPostClient);
 router.get('/admin/:id/client/detail', clientControllers.detailClient);
 router.get('/admin/:id/client/update', clientControllers.viewUpdateClient);
 router.post('/admin/:id/client', clientControllers.updateClient);
+router.delete('/admin/:id/client/delete', clientControllers.deleteClient);
 
 
 module.exports = router;
