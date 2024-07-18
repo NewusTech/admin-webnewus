@@ -6,7 +6,7 @@ router.get('/galeri/create', galeriControllers.viewPostGaleri);
 router.get('/galeri/detail/:id', galeriControllers.detailGaleri);
 router.get('/admin/:id/galeri/update', galeriControllers.viewUpdateGaleri);
 router.post('/admin/:id/galeri', galeriControllers.updateGaleri);
-
+router.delete('/admin/:id/media/delete', galeriControllers.deleteGaleri);
 
 
 module.exports = router;
