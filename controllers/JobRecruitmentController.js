@@ -154,4 +154,61 @@ module.exports = {
       res.render('jobrecruit/add_job_category', { errorMessage: 'Error creating job category' });
     }
   },
+
+  viewUpdateJobCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const jobrecruitmentcategoryResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/jobcategory/detail`
+      );
+  
+      const responseData = jobrecruitmentcategoryResponse.data;
+  
+      res.render("jobrecruit/edit_job_category", {
+        jobrecruitmentcategoryData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateJobCategory: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { title, token } = req.body;
+  
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/jobcategory/update`,
+        { title },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+  
+      if (updateResponse.status === 200) {
+        res.render('jobrecruit/edit_job_category', {
+          successMessage: 'Category updated successfully',
+          jobrecruitmentcategoryData: updateResponse.data.data 
+        });
+      } else {
+        res.render('jobrecruit/edit_job_category', {
+          errorMessage: 'Failed to update category',
+          jobrecruitmentcategoryData: req.body
+        });
+      }
+    } catch (error) {
+      console.error('Error updating category:', error.message);
+      res.render('jobrecruit/edit_job_category', {
+        errorMessage: 'Internal Server Error',
+        jobrecruitmentcategoryData: req.body
+      });
+    }
+  },
+  
 };

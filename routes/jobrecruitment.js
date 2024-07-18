@@ -8,7 +8,7 @@ router.get('/jobrecruit/detail/:id', jobrecruitmentControllers.detailJobRecruitm
 
 router.get('/jobrecruit/category', jobrecruitmentControllers.viewJobRecruitmentCategory);
 router.get('/jobrecruit/category/create', jobrecruitmentControllers.viewPostJobRecruitmentCategory);
-router.post('/jobrecruit/category/create', jobrecruitmentControllers.createJobRecruitmentCategory);
-router.get('/jobrecruit/category/detail/:id', jobrecruitmentControllers.detailJobRecruitmentCategory);
+router.get('/admin/:id/job/category', jobrecruitmentControllers.viewUpdateJobCategory);
+router.post('/admin/:id/job/category/update', jobrecruitmentControllers.updateJobCategory);
 
 module.exports = router;
