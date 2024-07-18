@@ -101,11 +101,11 @@ module.exports = {
   updateCompany: async (req, res) => {
     try {
       const id = req.params.id;
-      const { body, vision, mission, address, email, phoneNumber, siteTitle, siteDescription, footerDescription, token } = req.body;
+      const { body, vision, mission, token } = req.body;
   
       let companyResponse = await axios.put(
         `${process.env.baseUrl}/admin/${id}/aboutcompany/update`,
-        { title, body, vision, mission, address, email, phoneNumber, siteTitle, siteDescription, footerDescription },
+        { body, vision, mission },
         {
           headers: {
             Authorization: `Bearer ${token}`,
