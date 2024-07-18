@@ -15,10 +15,10 @@ module.exports = {
   },
 
   viewPostJobRecruitment: async (req, res) => {
-    let jobrecruitResponse = await axios.get(
+    let jobrecruitmentResponse = await axios.get(
       `${process.env.baseUrl}/admin/jobcategory/lists`
     );
-    let responseData = jobrecruitResponse.data;
+    let responseData = jobrecruitmentResponse.data;
 
     res.render("jobrecruit/add_job", {
       jobrecruitData : responseData.data,
@@ -81,6 +81,52 @@ module.exports = {
         }
     } catch (error) {
       res.render('jobrecruit/add_job', { errorMessage: 'Error creating job recruitment' });
+    }
+  },
+
+  viewUpdateJob: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter slug
+      const jobrecruitmentResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/jobrecruitment/detail`
+      );
+      const jobcategoryResponse = await axios.get(
+        `${process.env.baseUrl}/admin/jobcategory/lists`
+      );
+  
+      const responseData = jobrecruitmentResponse.data;
+      const responseDataCategory = jobcategoryResponse.data;
+  
+      res.render("jobrecruit/edit_job", {
+        jobrecruitmentData: responseData.data,
+        jobcategoryData: responseDataCategory.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateJob: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const jobrecruitmentData = req.body;
+
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/jobrecruitment/update`,
+        jobrecruitmentData
+      );
+
+      if (updateResponse.status === 200) {
+        res.redirect('/service');
+      } else {
+        res.status(400).send('Failed to update service data');
+      }
+    } catch (error) {
+      console.error('Error updating service data:', error);
+      res.status(500).send('Internal Server Error');
     }
   },
 
