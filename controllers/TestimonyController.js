@@ -61,5 +61,46 @@ module.exports = {
     }
   },
 
+  viewUpdateTestimony: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const testimonyResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/testimony/detail`
+      );
+  
+      const responseData = testimonyResponse.data;
+  
+      res.render("testimony/edit_testimony", {
+        testimonyData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateTestimony: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const testimonyData = req.body;
+
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/testimony/update`,
+        testimonyData
+      );
+
+      if (updateResponse.status === 200) {
+        res.redirect('/testimony');
+      } else {
+        res.status(400).send('Failed to update testimony data');
+      }
+    } catch (error) {
+      console.error('Error updating testimony data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+
   
 };

@@ -59,7 +59,7 @@
                     <h4>Write Your Testimony</h4>
                   </div>
                   <div class="card-body">
-                    <form id="serviceForm" enctype="multipart/form-data">
+                    <form id="testimonyForm" enctype="multipart/form-data">
                       <input type="hidden" id="tokenInput" name="token">
                       <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
@@ -149,7 +149,7 @@
       document.getElementById('tokenInput').value = token;
     });
 
-    document.getElementById('serviceForm').addEventListener('submit', function (event) {
+    document.getElementById('testimonyForm').addEventListener('submit', function (event) {
       event.preventDefault();
 
       Swal.fire({
@@ -161,7 +161,7 @@
         }
       });
 
-      const form = document.getElementById('serviceForm');
+      const form = document.getElementById('testimonyForm');
       const formData = new FormData(form);
       const token = localStorage.getItem('token');
 
