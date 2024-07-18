@@ -153,6 +153,24 @@ module.exports = {
     }
   },
 
+  deletePortofolio: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      // Memanggil endpoint API untuk menghapus layanan
+      await axios.delete(`${process.env.baseUrl}/admin/${id}/portfolio/deleted`);
+
+      res.status(200).json({
+        message: "Portofolio deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting portofolio",
+      });
+    }
+  },
+
   viewPortofolioCategory: async (req, res) => {
     let portofolioResponse = await axios.get(
       `${process.env.baseUrl}/admin/kategoriportofolio/get`
