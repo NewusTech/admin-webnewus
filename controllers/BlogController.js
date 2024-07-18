@@ -357,7 +357,36 @@ module.exports = {
     }
   },
 
-  
+  viewBlogRecomendation: async (req, res) => {
+    let blogResponse = await axios.get(
+      // "https://api-services.newus.id/api/admin/blog/get"
+      `${process.env.baseUrl}/admin/blog/get`,
+    );
+
+    let responseData = blogResponse.data;
+
+    res.render("blog/blog_recomendation", {
+      blogData : responseData.data,
+    });
+  },
+
+  viewPostBlogRecomendation: async (req, res) => {
+    let blogResponse = await axios.get(
+      `${process.env.baseUrl}/admin/kategoriblog/get`
+    );
+
+    let tagResponse = await axios.get(
+      `${process.env.baseUrl}/admin/tagblog/get`
+    );
+
+    let responseData = blogResponse.data;
+    let responseDataTag = tagResponse.data;
+
+    res.render("blog/add_blog_recomendation", {
+      blogData : responseData.data,
+      tagData : responseDataTag.data,
+    });
+  },
   
   
 };

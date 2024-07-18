@@ -12,7 +12,6 @@ router.post('/blog/category/create', blogControllers.createBlogCategory);
 router.get('/admin/:id/blog/category', blogControllers.viewUpdateBlogCategory);
 router.post('/admin/:id/blog/category/update', blogControllers.updateBlogCategory);
 
-
 router.get('/blog/tag', blogControllers.viewBlogTag);
 router.get('/blog/tag/create', blogControllers.viewPostBlogTag);
 router.get('/admin/tagblog/get/:id', blogControllers.detailBlogTag);
@@ -21,5 +20,8 @@ router.get('/admin/:id/blog/tag', blogControllers.viewUpdateBlogTag);
 router.post('/admin/:id/blog/tag/update', blogControllers.updateBlogTag);
 
 router.post('/blogggg', blogControllers.createBlog);
+
+router.get('/blog/rekomendasi', blogControllers.viewBlogRecomendation);
+router.get('/blog/rekomendasi/create', blogControllers.viewPostBlogRecomendation);
 
 module.exports = router;
