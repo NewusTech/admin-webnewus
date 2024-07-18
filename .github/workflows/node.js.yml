@@ -23,6 +23,10 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '20.x'
+    - name: Git pull
+      run: |
+          cd /home/newus-admin/htdocs/admin.newus.id
+          git pull
     - run: yarn install
     - name : change repo
       run : cd /home/newus-admin/htdocs/admin.newus.id/actions-runner/_work/admin-webnewus/admin-webnewus
