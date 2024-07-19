@@ -186,17 +186,20 @@
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.isConfirmed) {
+            const token = localStorage.getItem('token');
+    
             fetch(`/admin/tagportofolio/delete/${portofolioId}`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json'
-              }
+              },
+              body: JSON.stringify({ token: token })
             })
             .then(response => {
               if (response.ok) {
                 Swal.fire(
                   'Deleted!',
-                  'Your portofolio has been deleted.',
+                  'Your portofolio tag has been deleted.',
                   'success'
                 ).then(() => {
                   window.location.reload();
@@ -204,7 +207,7 @@
               } else {
                 Swal.fire(
                   'Failed!',
-                  'There was an error deleting the portofolio.',
+                  'There was an error deleting the portofolio tag.',
                   'error'
                 );
               }
@@ -212,7 +215,7 @@
             .catch(error => {
               Swal.fire(
                 'Failed!',
-                'There was an error deleting the portofolio.',
+                'There was an error deleting the portofolio tag.',
                 'error'
               );
             });
@@ -220,6 +223,8 @@
         });
       }
     </script>
+    
+    
   </body>
 
 </html>

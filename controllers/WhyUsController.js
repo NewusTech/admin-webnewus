@@ -117,4 +117,21 @@ module.exports = {
     }
   },
 
+  deleteWhyUs: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      await axios.delete(`${process.env.baseUrl}/admin/${id}/whyus/delete`);
+
+      res.status(200).json({
+        message: "Why us deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting why us",
+      });
+    }
+  },
+
 };

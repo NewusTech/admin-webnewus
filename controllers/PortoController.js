@@ -430,8 +430,14 @@ module.exports = {
   deletePortofolioTag: async (req, res) => {
     try {
       const { id } = req.params;
+      const { token } = req.body;
 
-      await axios.delete(`${process.env.baseUrl}/admin/tagportofolio/delete/${id}`);
+      await axios.delete(`${process.env.baseUrl}/admin/tagportofolio/delete/${id}`,  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      });
 
       res.status(200).json({
         message: "Portofolio tag deleted successfully",
