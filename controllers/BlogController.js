@@ -228,6 +228,29 @@ module.exports = {
       });
     }
   },
+
+  deleteBlogCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { token } = req.body;
+
+      await axios.delete(`${process.env.baseUrl}/admin/kategoriblog/delete/${id}`,  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      });
+
+      res.status(200).json({
+        message: "Blog category deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting blog category",
+      });
+    }
+  },
   
   viewBlogTag: async (req, res) => {
     let blogResponse = await axios.get(

@@ -11,6 +11,7 @@ router.get('/admin/kategoriblog/get/:id', blogControllers.detailBlogCategory);
 router.post('/blog/category/create', blogControllers.createBlogCategory);
 router.get('/admin/:id/blog/category', blogControllers.viewUpdateBlogCategory);
 router.post('/admin/:id/blog/category/update', blogControllers.updateBlogCategory);
+router.delete('/admin/kategoriblog/delete/:id', blogControllers.deleteBlogCategory);
 
 router.get('/blog/tag', blogControllers.viewBlogTag);
 router.get('/blog/tag/create', blogControllers.viewPostBlogTag);
