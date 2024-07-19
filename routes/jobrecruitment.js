@@ -12,5 +12,6 @@ router.get('/jobrecruit/category', jobrecruitmentControllers.viewJobRecruitmentC
 router.get('/jobrecruit/category/create', jobrecruitmentControllers.viewPostJobRecruitmentCategory);
 router.get('/admin/:id/job/category', jobrecruitmentControllers.viewUpdateJobCategory);
 router.post('/admin/:id/job/category/update', jobrecruitmentControllers.updateJobCategory);
+router.delete('/admin/:id/jobcategory/delete', jobrecruitmentControllers.deleteJobCategory);
 
 module.exports = router;
