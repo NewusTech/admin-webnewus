@@ -130,6 +130,29 @@ module.exports = {
     }
   },
 
+  deleteJob: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { token } = req.body;
+
+      await axios.delete(`${process.env.baseUrl}/admin/${id}/jobrecruitment/delete`,  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      });
+
+      res.status(200).json({
+        message: "Job deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting job",
+      });
+    }
+  },
+
   viewJobRecruitmentCategory: async (req, res) => {
     let jobrecruitmentcategoryResponse = await axios.get(
       `${process.env.baseUrl}/admin/jobcategory/lists`

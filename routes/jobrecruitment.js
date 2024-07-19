@@ -7,6 +7,7 @@ router.post('/jobrecruit/create', jobrecruitmentControllers.createJobRecruitment
 router.get('/jobrecruit/detail/:id', jobrecruitmentControllers.detailJobRecruitment);
 router.get('/admin/:id/job/update', jobrecruitmentControllers.viewUpdateJob);
 router.post('/admin/:id/job', jobrecruitmentControllers.updateJob);
+router.delete('/admin/:id/jobrecruitment/delete', jobrecruitmentControllers.deleteJob);
 
 router.get('/jobrecruit/category', jobrecruitmentControllers.viewJobRecruitmentCategory);
 router.get('/jobrecruit/category/create', jobrecruitmentControllers.viewPostJobRecruitmentCategory);
