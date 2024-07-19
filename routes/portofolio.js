@@ -15,6 +15,7 @@ router.post('/portofolio/category/create', portoControllers.createPortofolioCate
 router.get('/portofolio/category/detail/:id', portoControllers.detailPortofolioCategory);
 router.get('/admin/:id/portofolio/category', portoControllers.viewUpdatePortofolioCategory);
 router.post('/admin/:id/portofolio/category/update', portoControllers.updatePortofolioCategory);
+router.delete('/admin/kategoriportofolio/delete/:id', portoControllers.deletePortofolioCategory);
 
 router.get('/portofolio/tag', portoControllers.viewPortofolioTag);
 router.get('/portofolio/tag/create', portoControllers.viewPostPortofolioTag);
