@@ -136,6 +136,62 @@ module.exports = {
     }
   },
 
+  viewUpdateTeamCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const teamResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/divitioncategory/detail`
+      );
+  
+      const responseData = teamResponse.data;
+  
+      res.render("team/edit_team_category", {
+        teamData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateTeamCategory: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const { title, token } = req.body;
+  
+      let teamResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/divitioncategory/update`,
+        { title },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+  
+      if (teamResponse.status === 200) {
+        res.render('team/edit_team_category', {
+          successMessage: 'Category updated successfully',
+          teamData: teamResponse.data.data 
+        });
+      } else {
+        res.render('team/edit_team_category', {
+          errorMessage: 'Failed to updated team category',
+          teamData: req.body
+        });
+      }
+    } catch (error) {
+      console.error('Error updating category:', error.message);
+      res.render('team/edit_team_category', {
+        errorMessage: 'Internal Server Error',
+        teamData: req.body
+      });
+    }
+  },
+
   deleteTeamCategory: async (req, res) => {
     try {
       const { id } = req.params;
