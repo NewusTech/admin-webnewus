@@ -158,6 +158,12 @@
       document.getElementById('tokenInput').value = token;
     });
 
+    // Event listener untuk input file cover letter
+    document.getElementById('image-upload').addEventListener('change', function(event) {
+      const fileName = event.target.files[0].name;
+      document.getElementById('image-label').textContent = fileName;
+    });
+
     document.getElementById('jobForm').addEventListener('submit', function (event) {
   event.preventDefault();
 
