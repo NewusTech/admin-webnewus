@@ -18,7 +18,10 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-94034622-3');
@@ -70,17 +73,18 @@
                     <div class="form-group row align-items-center">
                       <label class="form-control-label col-sm-3 text-md-right">Image</label>
                       <div class="col-sm-12 col-md-7">
-                          <div class="custom-file">
-                              <input type="file" name="image" class="custom-file-input" id="image" data-filename="<%= skillData.image || '' %>">
-                              <label class="custom-file-label" for="image">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                        <div class="custom-file">
+                          <input type="file" name="image" class="custom-file-input" id="image"
+                            data-filename="<%= skillData.image || '' %>">
+                          <label class="custom-file-label" for="image">Choose File</label>
+                        </div>
+                        <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                       </div>
                     </div>
                     <div class="form-group row align-items-center">
                       <label class="form-control-label col-sm-3 text-md-right">Previous Image</label>
-                        <img src="<%= skillData.image %>" alt="Previous Image" width="150">
-                        </div>
+                      <img src="<%= skillData.image %>" alt="Previous Image" width="150">
+                    </div>
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
@@ -102,11 +106,11 @@
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="../assets/js/stisla.js"></script>
@@ -146,12 +150,12 @@
       const token = localStorage.getItem('token');
 
       fetch(`https://api-services.newus.id/api/admin/<%=skillData.id %>/skill/update`, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData
-      })
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData
+        })
         .then(response => {
           if (response.ok) {
             return response.json();
