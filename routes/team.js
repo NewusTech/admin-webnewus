@@ -4,6 +4,8 @@ const teamControllers = require("../controllers/TeamController");
 router.get('/team', teamControllers.viewTeam);
 router.get('/team/create', teamControllers.viewPostTeam);
 router.get('/admin/:id/team/detail', teamControllers.detailTeam);
+router.get('/admin/:id/team/update', teamControllers.viewUpdateTeam);
+router.post('/admin/:id/team', teamControllers.updateTeam);
 router.delete('/admin/:id/team/delete', teamControllers.deleteTeam);
 
 router.get('/teamCategory', teamControllers.viewTeamCategory);

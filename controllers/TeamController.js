@@ -46,6 +46,52 @@ module.exports = {
     }
   },
 
+  viewUpdateTeam: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const teamResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/team/detail`
+      );
+      const teamcategoryResponse = await axios.get(
+        `${process.env.baseUrl}/admin/divitioncategory/lists`
+      );
+  
+      const responseData = teamResponse.data;
+      const responseDataCategory = teamcategoryResponse.data;
+  
+      res.render("team/edit_team", {
+        teamData: responseData.data,
+        teamcategoryData: responseDataCategory.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateTeam: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const teamData = req.body;
+
+      let teamResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/team/update`,
+        teamData
+      );
+
+      if (teamResponse.status === 200) {
+        res.redirect('/team');
+      } else {
+        res.status(400).send('Failed to team team data');
+      }
+    } catch (error) {
+      console.error('Error updating team data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+
   deleteTeam: async (req, res) => {
     try {
       const { id } = req.params;
