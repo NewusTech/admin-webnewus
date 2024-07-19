@@ -64,32 +64,25 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control" name="title" required value="<%=galeriData.title %>">
+                        <input type="text" class="form-control" name="title" value="<%=galeriData.title %>">
                       </div>
                     </div>
-
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control" name="description" value="<%=galeriData.description %>" required>
+                        <input type="text" class="form-control" name="description" value="<%=galeriData.description %>">
                       </div>
                     </div>
-
-                    <div class="form-group row mb-4">
-                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
+                    <div class="form-group row align-items-center">
+                      <label class="form-control-label col-sm-3 text-md-right">Image</label>
                       <div class="col-sm-12 col-md-7">
-                        <div id="image-preview" class="image-preview">
-                          <label for="image-upload" id="image-label">Choose File</label>
-                          <input type="file" name="image" id="image-upload">
+                        <div class="custom-file">
+                          <input type="file" name="image" class="custom-file-input" id="image-upload">
+                          <label class="custom-file-label" for="image-upload" id="image-label">Choose File</label>
                         </div>
-                        <br>
-                        <label>Previous Image URL:</label>
-                        <br>
-                        <img src="<%= galeriData.image %>" alt="Previous Image" width="100">
-                        <br>
+                        <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                       </div>
                     </div>
-
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                       <div class="col-sm-12 col-md-7">
@@ -136,6 +129,18 @@
     document.addEventListener('DOMContentLoaded', function () {
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;
+
+      // Event listener for image upload
+      document.getElementById('image-upload').addEventListener('change', function () {
+        const fileName = this.files[0].name;
+        document.getElementById('image-label').textContent = fileName;
+      });
+
+      // Set initial filename for the image input
+      const initialFileName = document.getElementById('image-upload').dataset.filename;
+      if (initialFileName) {
+        document.getElementById('image-label').textContent = initialFileName;
+      }
     });
 
     document.getElementById('GaleriForm').addEventListener('submit', function (event) {
