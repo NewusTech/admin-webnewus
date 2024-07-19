@@ -380,6 +380,29 @@ module.exports = {
     }
   },
 
+  deleteBlogTag: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { token } = req.body;
+
+      await axios.delete(`${process.env.baseUrl}/admin/tagblog/delete/${id}`,  {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        }
+      });
+
+      res.status(200).json({
+        message: "Blog tag deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting blog tag",
+      });
+    }
+  },
+
   viewBlogRecomendation: async (req, res) => {
     let blogResponse = await axios.get(
       // "https://api-services.newus.id/api/admin/blog/get"
