@@ -22,5 +22,7 @@ router.post('/portofolio/tag/create', portoControllers.createPortofolioTag);
 router.get('/portofolio/tag/detail/:id', portoControllers.detailPortofolioTag);
 router.get('/admin/:id/portofolio/tag', portoControllers.viewUpdatePortofolioTag);
 router.post('/admin/:id/portofolio/tag/update', portoControllers.updatePortofolioTag);
+router.delete('/admin/tagportofolio/delete/:id', portoControllers.deletePortofolioTag);
+
 
 module.exports = router;

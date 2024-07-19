@@ -426,4 +426,21 @@ module.exports = {
       });
     }
   },
+
+  deletePortofolioTag: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      await axios.delete(`${process.env.baseUrl}/admin/tagportofolio/delete/${id}`);
+
+      res.status(200).json({
+        message: "Portofolio tag deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting portofolio tag",
+      });
+    }
+  },
 };
