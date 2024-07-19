@@ -9,7 +9,7 @@ module.exports = {
     
     let responseData = response.data
 
-    res.render("table", {
+    res.render("dashboard", {
       response: responseData,
     });
   },
