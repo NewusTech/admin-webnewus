@@ -15,6 +15,9 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/components.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -91,7 +94,7 @@
                             </th>
                             <th>Name</th>
                             <th>Title</th>
-                            <th>Divisi</th>
+                            <th>Description</th>
                           </tr>
                           <% teamData.forEach(function(team) { %>
                           <tr>
@@ -107,7 +110,7 @@
                                 <div class="bullet"></div>
                                 <a href="#">Edit</a>
                                 <div class="bullet"></div>
-                                <a href="#" class="text-danger">Trash</a>
+                                <a href="#" class="text-danger" onclick="confirmDelete(<%= team.id %>)">Trash</a>
                               </div>
                             </td>
                             <td>
@@ -176,6 +179,53 @@
   
     <!-- Page Specific JS File -->
     <script src="../assets/js/page/features-posts.js"></script>
+
+    <script>
+      function confirmDelete(teamId) {
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`/admin/${teamId}/team/delete`, {
+              method: 'DELETE',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => {
+              if (response.ok) {
+                Swal.fire(
+                  'Deleted!',
+                  'Your team has been deleted.',
+                  'success'
+                ).then(() => {
+                  window.location.reload();
+                });
+              } else {
+                Swal.fire(
+                  'Failed!',
+                  'There was an error deleting the team.',
+                  'error'
+                );
+              }
+            })
+            .catch(error => {
+              Swal.fire(
+                'Failed!',
+                'There was an error deleting the team.',
+                'error'
+              );
+            });
+          }
+        });
+      }
+    </script>
   </body>
 
 </html>

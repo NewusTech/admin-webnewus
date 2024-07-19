@@ -46,6 +46,24 @@ module.exports = {
     }
   },
 
+  deleteTeam: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      // Memanggil endpoint API untuk menghapus
+      await axios.delete(`${process.env.baseUrl}/admin/${id}/team/delete`);
+
+      res.status(200).json({
+        message: "Team deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting team",
+      });
+    }
+  },
+
   viewTeamCategory: async (req, res) => {
     let teamResponse = await axios.get(
       `${process.env.baseUrl}/admin/divitioncategory/lists`
