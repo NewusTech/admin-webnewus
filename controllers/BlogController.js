@@ -100,6 +100,75 @@ module.exports = {
       res.render('blog/add_blog', { errorMessage: 'Error creating blog' });
     }
   },
+
+  viewUpdateBlog: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const blogResponse = await axios.get(
+        `${process.env.baseUrl}/admin/blog/get/${id}`
+      );
+      const blogcategoryResponse = await axios.get(
+        `${process.env.baseUrl}/admin/kategoriblog/get`
+      );
+      const tagResponse = await axios.get(
+        `${process.env.baseUrl}/admin/tagblog/get`
+      );
+  
+      const responseData = blogResponse.data;
+      const responseDataCategory = blogcategoryResponse.data;
+      const responseDataTag = tagResponse.data;
+  
+      res.render("blog/edit_blog", {
+        blogData: responseData.data,
+        blogcategoryData: responseDataCategory.data,
+        tagData : responseDataTag.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updateBlog: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const blogData = req.body;
+
+      let blogResponse = await axios.put(
+        `${process.env.baseUrl}/admin/blog/update/${id}`,
+        blogData
+      );
+
+      if (blogResponse.status === 200) {
+        res.redirect('/blog');
+      } else {
+        res.status(400).send('Failed to blog data');
+      }
+    } catch (error) {
+      console.error('Error updating blog data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
+
+  deleteBlog: async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      // Memanggil endpoint API untuk menghapus layanan
+      await axios.delete(`${process.env.baseUrl}/admin/blog/delete/${id}`);
+
+      res.status(200).json({
+        message: "Blog deleted successfully",
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: "Error deleting blog",
+      });
+    }
+  },
   
   viewBlogCategory: async (req, res) => {
     let blogResponse = await axios.get(

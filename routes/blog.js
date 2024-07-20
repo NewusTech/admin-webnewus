@@ -4,6 +4,9 @@ const blogControllers = require("../controllers/BlogController");
 router.get('/blog', blogControllers.viewBlog);
 router.get('/blog/create', blogControllers.viewPostBlog);
 router.get('/admin/:slug/blog/detail', blogControllers.detailBlog);
+router.get('/admin/:id/blog/update', blogControllers.viewUpdateBlog);
+router.post('/admin/:id/blog', blogControllers.updateBlog);
+router.delete('/admin/blog/delete/:id', blogControllers.deleteBlog);
 
 router.get('/blog/category', blogControllers.viewBlogCategory);
 router.get('/blog/category/create', blogControllers.viewPostBlogCategory);
@@ -17,7 +20,7 @@ router.get('/blog/tag', blogControllers.viewBlogTag);
 router.get('/blog/tag/create', blogControllers.viewPostBlogTag);
 router.get('/admin/tagblog/get/:id', blogControllers.detailBlogTag);
 router.post('/blog/tag/create', blogControllers.createBlogTag);
-router.get('/admin/:id/blog/tag', blogControllers.viewUpdateBlogTag);
+router.get('/admin/blog/delete/:id', blogControllers.viewUpdateBlogTag);
 router.post('/admin/:id/blog/tag/update', blogControllers.updateBlogTag);
 router.delete('/admin/tagblog/delete/:id', blogControllers.deleteBlogTag);
 
