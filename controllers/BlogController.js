@@ -105,9 +105,9 @@ module.exports = {
     try {
       const { id } = req.params;
   
-      // Panggil API dengan parameter id
+      // Panggil API dengan parameter slug
       const blogResponse = await axios.get(
-        `${process.env.baseUrl}/admin/blog/get/${id}`
+        `${process.env.baseUrl}/admin/blog/update/${id}`
       );
       const blogcategoryResponse = await axios.get(
         `${process.env.baseUrl}/admin/kategoriblog/get`

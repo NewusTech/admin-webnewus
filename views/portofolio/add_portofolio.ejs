@@ -118,6 +118,16 @@
                           </select>
                         </div>
                       </div>
+                      <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portofolio</label>
+                        <div class="col-sm-12 col-md-7">
+                          <select class="form-control selectric" name="TechnologyPortofolioId" id="">
+                            <% technologyData.forEach(function(technologyData) { %>
+                            <option value="<%= technologyData.id %>"><%= technologyData.title %></option>
+                            <% }); %>
+                          </select>
+                        </div>
+                      </div>
                       <div class="form-group row align-items-center">
                         <label class="form-control-label col-sm-3 text-md-right">Logo</label>
                         <div class="col-sm-12 col-md-7">
@@ -150,6 +160,23 @@
                           <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                         </div>
                       </div>
+                      <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Closing Description</label>
+                        <div class="col-sm-12 col-md-7">
+                          <textarea name="closingDescription" id="closingDescription"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row align-items-center">
+                        <label class="form-control-label col-sm-3 text-md-right">Galeri</label>
+                        <div class="col-sm-12 col-md-7">
+                          <div class="custom-file">
+                            <input type="file" name="galeri" class="custom-file-input" id="galeri" multiple>
+                            <label class="custom-file-label" for="galeri">Choose Files</label>
+                          </div>
+                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                          <div id="gallery-preview" class="mt-2"></div> <!-- Tempat untuk menampilkan pratinjau gambar -->
+                        </div>
+                      </div>                                                                 
                       <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">
@@ -192,6 +219,7 @@
   
   <script>
     CKEDITOR.replace('body');
+    CKEDITOR.replace('closingDescription');
   </script>
 
   <script>
@@ -204,7 +232,37 @@
       $('#image').on('change', function () {
         var fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').html(fileName);
-      });
+      var fileList = this.files;
+      var galleryPreview = document.getElementById('gallery-preview');
+      galleryPreview.innerHTML = '';
+
+      for (var i = 0; i < fileList.length; i++) {
+        var file = fileList[i];
+
+        if (file && file.type.match('image.*')) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('img-thumbnail');
+            img.classList.add('mr-2');
+            img.style.maxWidth = '100px';
+            img.style.maxHeight = '100px';
+            galleryPreview.appendChild(img);
+          };
+
+          reader.readAsDataURL(file);
+        }
+      }
+
+      var fileNameList = [];
+      for (var i = 0; i < fileList.length; i++) {
+        fileNameList.push(fileList[i].name);
+      }
+      var fileName = fileNameList.join(', ');
+      $(this).next('.custom-file-label').html(fileName);
+    });
 
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;

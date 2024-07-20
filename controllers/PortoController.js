@@ -18,17 +18,22 @@ module.exports = {
     let portofolioResponse = await axios.get(
       `${process.env.baseUrl}/admin/kategoriportofolio/get`
     );
-
+    
     let tagResponse = await axios.get(
       `${process.env.baseUrl}/admin/tagportofolio/get`
+    );
+    let technologyResponse = await axios.get(
+      `${process.env.baseUrl}/admin/technology/lists`
     );
 
     let responseData = portofolioResponse.data;
     let responseDataTag = tagResponse.data;
+    let responseDataTechnology = technologyResponse.data;
 
     res.render("portofolio/add_portofolio", {
       portofolioData: responseData.data,
       tagData : responseDataTag.data,
+      technologyData : responseDataTechnology.data,
     });
   },
 
