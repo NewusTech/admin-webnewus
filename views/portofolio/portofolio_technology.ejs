@@ -180,7 +180,7 @@
     <!-- Page Specific JS File -->
     <script src="../assets/js/page/features-posts.js"></script>
     <script>
-      function confirmDelete(portofolioId) {
+      function confirmDelete(technologyId) {
         Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -191,7 +191,7 @@
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
           if (result.isConfirmed) {
-            fetch(`/admin/${clientId}/client/delete`, {
+            fetch(`/admin/${technologyId}/technology/delete`, {
               method: 'DELETE',
               headers: {
                 'Content-Type': 'application/json'
@@ -201,7 +201,7 @@
               if (response.ok) {
                 Swal.fire(
                   'Deleted!',
-                  'Your client has been deleted.',
+                  'Your technology has been deleted.',
                   'success'
                 ).then(() => {
                   window.location.reload();
@@ -209,7 +209,7 @@
               } else {
                 Swal.fire(
                   'Failed!',
-                  'There was an error deleting the client.',
+                  'There was an error deleting the technology.',
                   'error'
                 );
               }
@@ -217,7 +217,7 @@
             .catch(error => {
               Swal.fire(
                 'Failed!',
-                'There was an error deleting the client.',
+                'There was an error deleting the technology.',
                 'error'
               );
             });

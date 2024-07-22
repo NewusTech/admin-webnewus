@@ -30,6 +30,6 @@ router.get('/portofolio/tech/create', portoControllers.viewPostPortofolioTechnol
 router.post('/portofolio/tech/create', portoControllers.createPortofolioTechnology);
 router.get('/admin/:id/portofolio/tech/update', portoControllers.viewUpdatePortofolioTechnology);
 router.post('/admin/:id/portofolio/tech', portoControllers.updatePortofolioTechnology);
-
+router.delete('/admin/:id/technology/delete', portoControllers.deletePortofolioTechnology);
 
 module.exports = router;
