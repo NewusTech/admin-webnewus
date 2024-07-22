@@ -477,4 +477,99 @@ module.exports = {
       });
     }
   },
+
+  viewPortofolioTechnology: async (req, res) => {
+    let portofolioResponse = await axios.get(
+      `${process.env.baseUrl}/admin/technology/lists`
+    );
+
+    let responseData = portofolioResponse.data;
+
+    res.render("portofolio/portofolio_technology", {
+      portofolioData : responseData.data,
+    });
+  },
+
+  viewPostPortofolioTechnology: async (req, res) => {
+    let portofolioResponse = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+
+    let portofolioData = portofolioResponse.data;
+
+    res.render("portofolio/add_portofolio_technology", {
+      portofolioData,
+    });
+  },
+
+  createPortofolioTechnology: async (req, res) => {
+    try {
+      const {
+        title,
+        image,
+        token,
+      } = req.body;
+      const response = await axios.post(`${process.env.baseUrl}/admin/technology/new-technology`, {
+        title,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        image,
+        token,
+      }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.status === 201) {
+          res.render('portofolio/add_portofolio_technology', { successMessage: 'Technology created successfully' });
+        } else {
+          res.render('portofolio/add_portofolio_technology', { errorMessage: 'Failed to create technology' });
+        }
+    } catch (error) {
+      res.render('portofolio/add_portofolio_technology', { errorMessage: 'Error creating technology' });
+    }
+  },
+
+  viewUpdatePortofolioTechnology: async (req, res) => {
+    try {
+      const { id } = req.params;
+  
+      // Panggil API dengan parameter id
+      const portofolioResponse = await axios.get(
+        `${process.env.baseUrl}/admin/${id}/technology/detail`
+      );
+  
+      const responseData = portofolioResponse.data;
+  
+      res.render("portofolio/edit_portofolio", {
+        portofolioData: responseData.data,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Terjadi kesalahan pada server");
+    }
+  },
+
+  updatePortofolioTechnology: async (req, res) => {
+    try {
+      const id = req.params.id;
+      const portofolioData = req.body;
+
+      let updateResponse = await axios.put(
+        `${process.env.baseUrl}/admin/${id}/technology/update`,
+        portofolioData
+      );
+
+      if (updateResponse.status === 200) {
+        res.redirect('/portofolio/tech');
+      } else {
+        res.status(400).send('Failed to update technology data');
+      }
+    } catch (error) {
+      console.error('Error updating technology data:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  },
 };

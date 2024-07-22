@@ -25,5 +25,11 @@ router.get('/admin/:id/portofolio/tag', portoControllers.viewUpdatePortofolioTag
 router.post('/admin/:id/portofolio/tag/update', portoControllers.updatePortofolioTag);
 router.delete('/admin/tagportofolio/delete/:id', portoControllers.deletePortofolioTag);
 
+router.get('/portofolio/tech', portoControllers.viewPortofolioTechnology);
+router.get('/portofolio/tech/create', portoControllers.viewPostPortofolioTechnology);
+router.post('/portofolio/tech/create', portoControllers.createPortofolioTechnology);
+router.get('/admin/:id/portofolio/tech/update', portoControllers.viewUpdatePortofolioTechnology);
+router.post('/admin/:id/portofolio/tech', portoControllers.updatePortofolioTechnology);
+
 
 module.exports = router;

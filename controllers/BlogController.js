@@ -475,7 +475,7 @@ module.exports = {
   viewBlogRecomendation: async (req, res) => {
     let blogResponse = await axios.get(
       // "https://api-services.newus.id/api/admin/blog/get"
-      `${process.env.baseUrl}/admin/blog/get`,
+      `${process.env.baseUrl}/admin/blog/recomendation`,
     );
 
     let responseData = blogResponse.data;
@@ -487,19 +487,19 @@ module.exports = {
 
   viewPostBlogRecomendation: async (req, res) => {
     let blogResponse = await axios.get(
-      `${process.env.baseUrl}/admin/kategoriblog/get`
+      `${process.env.baseUrl}/admin/blog/get`
     );
 
-    let tagResponse = await axios.get(
-      `${process.env.baseUrl}/admin/tagblog/get`
-    );
+    // let tagResponse = await axios.get(
+    //   `${process.env.baseUrl}/admin/tagblog/get`
+    // );
 
     let responseData = blogResponse.data;
-    let responseDataTag = tagResponse.data;
+    // let responseDataTag = tagResponse.data;
 
     res.render("blog/add_blog_recomendation", {
       blogData : responseData.data,
-      tagData : responseDataTag.data,
+      // tagData : responseDataTag.data,
     });
   },
   
