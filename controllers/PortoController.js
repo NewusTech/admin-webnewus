@@ -543,7 +543,7 @@ module.exports = {
   
       const responseData = portofolioResponse.data;
   
-      res.render("portofolio/edit_portofolio", {
+      res.render("portofolio/edit_portofolio_technology", {
         portofolioData: responseData.data,
       });
     } catch (error) {
