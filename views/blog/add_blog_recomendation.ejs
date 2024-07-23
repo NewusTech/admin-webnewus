@@ -60,7 +60,7 @@
                     <h4>Select Your Choose</h4>
                   </div>
                   <div class="card-body">
-                    <form id="whyusForm" enctype="multipart/form-data">
+                    <form id="blogrekomendasiForm" enctype="multipart/form-data">
                       <input type="hidden" id="tokenInput" name="token">
                       <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Blog</label>
@@ -134,7 +134,7 @@
       document.getElementById('tokenInput').value = token;
     });
 
-    document.getElementById('whyusForm').addEventListener('submit', function (event) {
+    document.getElementById('blogrekomendasiForm').addEventListener('submit', function (event) {
   event.preventDefault();
 
   Swal.fire({
@@ -151,11 +151,11 @@
     CKEDITOR.instances[instance].updateElement();
   }
 
-  const form = document.getElementById('whyusForm');
+  const form = document.getElementById('blogrekomendasiForm');
   const formData = new FormData(form);
   const token = localStorage.getItem('token');
 
-  fetch('https://api-services.newus.id/api/admin/blog/create', {
+  fetch('https://api-services.newus.id/api/admin/blog/recomendation/create', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`
@@ -167,24 +167,24 @@
         return response.json();
       } else {
         return response.json().then(data => {
-          throw new Error(data.message || 'Failed to create blog');
+          throw new Error(data.message || 'Failed to create blog rekomendasi');
         });
       }
     })
     .then(data => {
       Swal.fire({
         title: 'Success!',
-        text: 'Blog created successfully.',
+        text: 'Blog rekomendasi created successfully.',
         icon: 'success',
       }).then(() => {
-        window.location.href = '/blog';
+        window.location.href = '/blog/rekomendasi';
       });
     })
     .catch(error => {
       console.error('Error:', error);
       Swal.fire({
         title: 'Error!',
-        text: 'Error creating blog: ' + error.message,
+        text: 'Error creating blog rekomendasi: ' + error.message,
         icon: 'error',
       });
     });
