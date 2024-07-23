@@ -132,6 +132,18 @@
                                                 <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                                             </div>
                                         </div>
+                                        <div class="form-group row align-items-center">
+                                            <label class="form-control-label col-sm-3 text-md-right">Previous Image</label>
+                                            <div class="col-sm-12 col-md-7">
+                                              <img src="<%= blogData.image %>" alt="Previous Image" width="150">
+                                            </div>
+                                          </div>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alt Image</label>
+                                            <div class="col-sm-12 col-md-7">
+                                              <input type="text" class="form-control" name="altImage" value="<%=blogData.altImage %>">
+                                            </div>
+                                          </div>
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Publish By</label>
                                             <div class="col-sm-12 col-md-7">
@@ -142,10 +154,10 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <select name="status" class="form-control selectric" id="" value="<%=blogData.status %>"></select>>
-                                                    <option value="1">Published</option>
-                                                    <option value="2">Draft</option>
-                                                  <select>
+                                              <select name="status" class="form-control selectric" id="" value="<%=blogData.status %>">
+                                                <option value="1">Published</option>
+                                                <option value="2">Draft</option>
+                                              <select>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
