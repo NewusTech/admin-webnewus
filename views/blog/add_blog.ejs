@@ -60,7 +60,7 @@
                     <h4>Write Your Blog</h4>
                   </div>
                   <div class="card-body">
-                    <form id="whyusForm" enctype="multipart/form-data">
+                    <form id="blogForm" enctype="multipart/form-data">
                       <input type="hidden" id="tokenInput" name="token">
                       <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
@@ -106,8 +106,8 @@
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Blog</label>
                         <div class="col-sm-12 col-md-7">
                           <select class="form-control selectric" name="kategoriblog_id" id="">
-                            <% blogData.forEach(function(blog) { %>
-                            <option value="<%= blog.id %>"><%= blog.title %></option>
+                            <% blogData.forEach(function(kategoriblog) { %>
+                            <option value="<%= kategoriblog.id %>"><%= kategoriblog.title %></option>
                             <% }); %>
                           </select>
                         </div>
@@ -208,7 +208,7 @@
       });
     });
 
-    document.getElementById('whyusForm').addEventListener('submit', function (event) {
+    document.getElementById('blogForm').addEventListener('submit', function (event) {
   event.preventDefault();
 
   Swal.fire({
@@ -225,11 +225,11 @@
     CKEDITOR.instances[instance].updateElement();
   }
 
-  const form = document.getElementById('whyusForm');
+  const form = document.getElementById('blogForm');
   const formData = new FormData(form);
   const token = localStorage.getItem('token');
 
-  fetch('https://api-services.newus.id/admin/blog/create', {
+  fetch('https://api-services.newus.id/api/admin/blog/create', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`
