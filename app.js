@@ -21,6 +21,8 @@ var clientRouter = require('./routes/client');
 var testimonyRouter = require('./routes/testimony');
 var skillRouter = require('./routes/skill');
 var whyusRouter = require('./routes/whyus');
+var legalitasRouter = require('./routes/legalitas');
+
 
 var app = express();
 
@@ -55,6 +57,7 @@ app.use('/', clientRouter);
 app.use('/', testimonyRouter);
 app.use('/', skillRouter);
 app.use('/', whyusRouter);
+app.use('/', legalitasRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

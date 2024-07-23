@@ -229,7 +229,7 @@
   const formData = new FormData(form);
   const token = localStorage.getItem('token');
 
-  fetch('https://api-services.newus.id/api/admin/blog/create', {
+  fetch('https://api-services.newus.id/admin/blog/create', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${token}`
