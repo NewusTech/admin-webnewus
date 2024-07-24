@@ -28,5 +28,6 @@ router.post('/blogggg', blogControllers.createBlog);
 
 router.get('/blog/rekomendasi', blogControllers.viewBlogRecomendation);
 router.get('/blog/rekomendasi/create', blogControllers.viewPostBlogRecomendation);
+router.post('/blog/rekomendasi/create', blogControllers.createBlogRecomendation);
 
 module.exports = router;

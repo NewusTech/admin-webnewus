@@ -99,23 +99,21 @@
                                             <tr>
                                                 <td>
                                                     <div class="custom-checkbox custom-control">
-                                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<%= legalitas.id %>">
-                                                        <label for="checkbox-<%= data.id %>" class="custom-control-label">&nbsp;</label>
+                                                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<%= legalitasData.id %>">
+                                                        <label for="checkbox-<%= legalitasData.id %>" class="custom-control-label">&nbsp;</label>
                                                     </div>
                                                 </td>
                                                 <td>Bidang Usaha
                                                     <div class="table-links">
                                                         <a href="#">View</a>
                                                         <div class="bullet"></div>
-                                                        <a href="/admin/<%= data.id %>/intern-recruitment">Edit</a>
-                                                        <!-- <div class="bullet"></div>
-                                                        <a href="#" class="text-danger" onclick="confirmDelete(<%= legalitas.id %>)">Trash</a> -->
+                                                        <a href="/admin/<%= legalitasData.id %>/intern-recruitment">Edit</a>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="<%= data.companyProfile %>" target="_blank" class="btn btn-primary btn-sm">Lihat File</a>
+                                                    <a href="<%= legalitasData.bidangUsaha %>" target="_blank" class="btn btn-primary btn-sm">Lihat File</a>
                                                 </td>
-                                                <td><%= data.createdAt %></td>
+                                                <td><%= legalitasData.createdAt %></td>
                                             </tr>
                                         </table>
                                     </div>

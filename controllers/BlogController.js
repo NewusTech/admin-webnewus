@@ -487,7 +487,7 @@ module.exports = {
 
   viewPostBlogRecomendation: async (req, res) => {
     let blogResponse = await axios.get(
-      `${process.env.baseUrl}/admin/blog/get`
+      `${process.env.baseUrl}/admin/blog/get` 
     );
 
     let responseData = blogResponse.data;
@@ -497,5 +497,34 @@ module.exports = {
     });
   },
   
+  createBlogRecomendation: async (req, res) => {
+    try {
+      const { BlogId, status, token } = req.body;
+      const blogResponse = await axios.post(`${process.env.baseUrl}/admin/blog/recomendation/create`, {
+        BlogId,
+        status,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        token,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      let responseData = response.data;
+  
+      if (responseData.status === 201) { // Memperbaiki nama variabel dari response menjadi blogResponse
+        res.render('blog/blog_recomendation', { 
+          successMessage: 'Blog recomendation created successfully'
+        });
+      } else {
+        res.render('blog/blog_recomendation', { errorMessage: 'Failed to create blog recomendation' });
+      }
+    } catch (error) {
+      res.render('blog/blog_recomendation', { errorMessage: 'Error creating blog recomendation' });
+    }
+  }
   
 };

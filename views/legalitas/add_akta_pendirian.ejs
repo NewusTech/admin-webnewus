@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Create New Skill &mdash; Stisla</title>
+  <title>Create Akta Pendirian &mdash; Stisla</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
@@ -16,6 +16,7 @@
 
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
@@ -38,7 +39,7 @@
             <div class="section-header-back">
               <a href="" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Create New Skill</h1>
+            <h1>Create Akta Pendirian</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
               <div class="breadcrumb-item"><a href="#">Posts</a></div>
@@ -47,43 +48,34 @@
           </div>
 
           <div class="section-body">
-            <h2 class="section-title">New Skill</h2>
+            <h2 class="section-title">New Akta Pendirian</h2>
             <p class="section-lead">
-              On this page you can create a new skill and fill in all fields.
+              On this page you can create a new akta pendirian and fill in all fields.
             </p>
 
             <div class="row">
               <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h4>Write Your Skill</h4>
+                    <h4>Upload Akta Pendirian</h4>
                   </div>
                   <div class="card-body">
-                    <form id="blogForm" enctype="multipart/form-data">
+                    <form id="legalitasForm" enctype="multipart/form-data">
                       <input type="hidden" id="tokenInput" name="token">
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Blog</label>
+                      <div class="form-group row align-items-center">
+                        <label class="form-control-label col-sm-3 text-md-right">Akta Pendirian</label>
                         <div class="col-sm-12 col-md-7">
-                          <select class="form-control selectric" name="BlogId" id="BlogId">
-                            <% blogData.forEach(function(blog) { %>
-                              <option value="<%= blog.id %>"><%= blog.title %></option>
-                            <% }); %>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select class="form-control selectric" id="" name="status">
-                            <option value="0">Tidak Direkomendasi</option>
-                            <option value="2">Rekomendasi</option>
-                          <select>
+                          <div class="custom-file">
+                            <input type="file" name="aktaPendirian" class="custom-file-input" id="image-upload">
+                            <label class="custom-file-label" for="image-upload" id="image-label">Choose File</label>
+                          </div>
+                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                         </div>
                       </div>
                       <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">
-                          <button type="submit" class="btn btn-primary">Create Skill</button>
+                          <button type="submit" class="btn btn-primary">Upload Dokumen</button>
                         </div>
                       </div>
                     </form>
@@ -121,16 +113,23 @@
   <script src="../assets/js/page/features-posts.js"></script>
   <!-- SweetAlert JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;
+
+      // Event listener untuk input file image
+      document.getElementById('image-upload').addEventListener('change', function(event) {
+        const fileName = event.target.files[0].name;
+        document.getElementById('image-label').textContent = fileName;
+      });
     });
-  
-    document.getElementById('blogForm').addEventListener('submit', function (event) {
+
+    document.getElementById('legalitasForm').addEventListener('submit', function (event) {
       event.preventDefault();
-  
+
       Swal.fire({
         title: 'Loading...',
         text: 'Please wait!',
@@ -139,54 +138,47 @@
           Swal.showLoading()
         }
       });
-  
-      const form = document.getElementById('blogForm');
+
+      const form = document.getElementById('legalitasForm');
       const formData = new FormData(form);
-      const formObject = {};
-      
-      formData.forEach((value, key) => {
-        formObject[key] = value;
-      });
-  
       const token = localStorage.getItem('token');
-  
-      fetch('https://api-services.newus.id/api/admin/blog/recomendation/create', {
+
+      fetch('https://api-services.newus.id/api/admin/legalitas/create', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(formObject)
+        body: formData
       })
         .then(response => {
           if (response.ok) {
             return response.json();
           } else {
             return response.json().then(data => {
-              throw new Error(data.message || 'Failed to create blog');
+              throw new Error(data.message || 'Failed to create akta pendirian');
             });
           }
         })
         .then(data => {
           Swal.fire({
             title: 'Success!',
-            text: 'Blog created successfully.',
+            text: 'akta pendirian created successfully.',
             icon: 'success',
           }).then(() => {
-            window.location.href = '/blog';
+            window.location.href = '/akta/pendirian';
           });
         })
         .catch(error => {
           console.error('Error:', error);
           Swal.fire({
             title: 'Error!',
-            text: 'Error creating blog: ' + error.message,
+            text: 'Error creating akta pendirian: ' + error.message,
             icon: 'error',
           });
         });
     });
+
   </script>
-  
 </body>
 
 </html>
