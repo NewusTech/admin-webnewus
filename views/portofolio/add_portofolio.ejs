@@ -238,6 +238,11 @@
       $('#image').on('change', function () {
         var fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').html(fileName);
+      
+      $('#galeri').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName);
+        
       var fileList = this.files;
       var galleryPreview = document.getElementById('gallery-preview');
       galleryPreview.innerHTML = '';

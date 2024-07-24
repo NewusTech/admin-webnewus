@@ -14,15 +14,15 @@ module.exports = {
     });
   },
 
-  viewSetting: async (req, res) => {
-    let settingResponse = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
+  // viewSetting: async (req, res) => {
+  //   let settingResponse = await axios.get(
+  //     "https://jsonplaceholder.typicode.com/posts"
+  //   );
 
-    let settingData = settingResponse.data;
+  //   let settingData = settingResponse.data;
 
-    res.render("setting", {
-      settingData,
-    });
-  }
+  //   res.render("setting", {
+  //     settingData,
+  //   });
+  // }
 };

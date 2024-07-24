@@ -4,47 +4,25 @@ module.exports = {
 
   viewSetting: async (req, res) => {
     try {
-      const { id } = req.params;
   
       // Panggil API dengan parameter id
       const settingResponse = await axios.get(
-        `${process.env.baseUrl}/admin/${id}/aboutcompany/detail`
+        `${process.env.baseUrl}/admin/1/aboutcompany/detail`
       );
   
-      const responseData = settingResponse.data;
-  
-      res.render("/setting", {
-        settingData: responseData.data,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("Terjadi kesalahan pada server");
-    }
-  },
+      let responseData = settingResponse.data;
 
-  viewUpdateSetting: async (req, res) => {
-    try {
-      const { id } = req.params;
-  
-      // Panggil API dengan parameter id
-      const settingResponse = await axios.get(
-        `${process.env.baseUrl}/admin/${id}/aboutcompany/detail`
-      );
-  
-      const responseData = settingResponse.data;
-  
-      res.render("/setting", {
-        settingData: responseData.data,
+      res.render("setting", {
+        dataSetting : responseData.data
       });
     } catch (error) {
-      console.error(error);
+      console.error('ERRRRRRR : ',error);
       res.status(500).send("Terjadi kesalahan pada server");
     }
   },
 
   updateSetting: async (req, res) => {
-    try {
-      const id = req.params.id;
+      const id = 1;
       const settingData = req.body;
 
       let updateResponse = await axios.put(
@@ -57,11 +35,10 @@ module.exports = {
       } else {
         res.status(400).send('Failed to update setting data');
       }
-    } catch (error) {
+    }, catch (error) {
       console.error('Error updating setting data:', error);
       res.status(500).send('Internal Server Error');
-    }
-  },
+    },
 
   viewSosmed: async (req, res) => {
     let settingResponse = await axios.get(

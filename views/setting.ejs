@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -10,29 +9,14 @@
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
 
-    <!-- CSS Libraries -->
-
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
-    <!-- Start GA -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-94034622-3');
-    </script>
-    <!-- /END GA -->
 </head>
 <body>
     <div id="app">
         <!-- Sidebar -->
-        <%-include('./sidebar.ejs')-%>
+        <%- include('./sidebar.ejs') %>
   
         <!-- Main Content -->
         <div class="main-content">
@@ -67,9 +51,6 @@
                         <li class="nav-item"><a href="/setting" class="nav-link active">General</a></li>
                         <li class="nav-item"><a href="/seo" class="nav-link">SEO</a></li>
                         <li class="nav-item"><a href="/socialmedia" class="nav-link">Social Media</a></li>
-                        <!-- <li class="nav-item"><a href="#" class="nav-link">System</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Security</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Automation</a></li> -->
                       </ul>
                     </div>
                   </div>
@@ -86,33 +67,33 @@
                         <div class="form-group row align-items-center">
                           <label for="site-title" class="form-control-label col-sm-3 text-md-right">Site Title</label>
                           <div class="col-sm-6 col-md-9">
-                            <input type="text" name="site_title" class="form-control" id="site-title"  value="<%=settingData.siteTitle %>">
+                            <input type="text" class="form-control" name="siteTitle" value="<%= dataSetting.siteTitle %>">
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
                           <label for="site-description" class="form-control-label col-sm-3 text-md-right">Site Description</label>
                           <div class="col-sm-6 col-md-9">
-                            <textarea class="form-control" name="site_description" id="site-description"><%=settingData.siteDescription %></textarea>
+                            <textarea class="form-control" name="siteDescription" id="site-description"><%= dataSetting.siteDescription %></textarea>
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
                           <label for="phone-number" class="form-control-label col-sm-3 text-md-right">No Handphone</label>
                           <div class="col-sm-6 col-md-9">
-                            <input type="text" name="phone_number" class="form-control" id="phone-number" value="<%=settingData.phoneNumber %>">
+                            <input type="text" name="phoneNumber" class="form-control" id="phone-number" value="<%= dataSetting.phoneNumber %>">
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
                           <label for="address" class="form-control-label col-sm-3 text-md-right">Alamat</label>
                           <div class="col-sm-6 col-md-9">
-                            <input type="text" name="address" class="form-control" id="address" value="<%=settingData.address %>">
+                            <input type="text" name="address" class="form-control" id="address" value="<%= dataSetting.address %>">
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
                           <label class="form-control-label col-sm-3 text-md-right">Site Logo</label>
                           <div class="col-sm-6 col-md-9">
                             <div class="custom-file">
-                              <input type="file" name="site_logo" class="custom-file-input" id="site-logo">
-                              <label class="custom-file-label" for="site-logo">Choose File</label>
+                              <input type="file" name="siteLogo" class="custom-file-input" id="site-logo">
+                              <label class="custom-file-label" for="site-logo"><%= dataSetting.siteLogo ? dataSetting.siteLogo.split('/').pop() : 'Choose File' %></label>
                             </div>
                             <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                           </div>
@@ -121,8 +102,8 @@
                           <label class="form-control-label col-sm-3 text-md-right">Footer Logo</label>
                           <div class="col-sm-6 col-md-9">
                             <div class="custom-file">
-                              <input type="file" name="footer_logo" class="custom-file-input" id="footer-logo">
-                              <label class="custom-file-label" for="footer-logo">Choose File</label>
+                              <input type="file" name="footerLogo" class="custom-file-input" id="footer-logo">
+                              <label class="custom-file-label" for="footer-logo"><%= dataSetting.footerLogo ? dataSetting.footerLogo.split('/').pop() : 'Choose File' %></label>
                             </div>
                             <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                           </div>
@@ -130,13 +111,13 @@
                         <div class="form-group row align-items-center">
                           <label class="form-control-label col-sm-3 text-md-right">Favicon</label>
                           <div class="col-sm-6 col-md-9">
-                              <div class="custom-file">
-                                  <input type="file" name="site_favicon" class="custom-file-input" id="site-favicon">
-                                  <label class="custom-file-label" for="site-favicon">Choose File</label>
-                              </div>
-                              <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                            <div class="custom-file">
+                              <input type="file" name="favicon" class="custom-file-input" id="site-favicon">
+                              <label class="custom-file-label" for="site-favicon"><%= dataSetting.favicon ? dataSetting.favicon.split('/').pop() : 'Choose File' %></label>
+                            </div>
+                            <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                           </div>
-                      </div>
+                        </div>
                       </div>
                       <div class="card-footer bg-whitesmoke text-md-right">
                         <button class="btn btn-primary" id="save-btn">Save Changes</button>
@@ -145,25 +126,19 @@
                     </div>
                   </form>
                 </div>
-                </div>
               </div>
-                </div>
-            </section>
+            </div>
+          </section>
         </div>
 
         <!-- Footer-->
-        <%-include('./footer.ejs')-%>
-     
+        <%- include('./footer.ejs') %>
     </div>
   
-     <!-- General JS Scripts -->
+  <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="../assets/js/stisla.js"></script>
@@ -184,6 +159,14 @@
     document.addEventListener('DOMContentLoaded', function () {
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;
+
+      // Update label file input with the filename
+      document.querySelectorAll('.custom-file-input').forEach(input => {
+        input.addEventListener('change', function() {
+          const fileName = this.files[0].name;
+          this.nextElementSibling.innerHTML = fileName;
+        });
+      });
     });
 
     document.getElementById('settingForm').addEventListener('submit', function (event) {
@@ -202,7 +185,7 @@
       const formData = new FormData(form);
       const token = localStorage.getItem('token');
 
-      fetch(`https://api-services.newus.id/api/admin/<%=settingData.id %>/aboutcompany/update`, {
+      fetch(`https://api-services.newus.id/api/admin/1/aboutcompany/update`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -237,5 +220,4 @@
     });
   </script>
 </body>
-
 </html>
