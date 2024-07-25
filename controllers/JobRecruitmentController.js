@@ -215,12 +215,12 @@ module.exports = {
         });
 
         if (response.status === 201) {
-          res.render('jobrecruit/add_job_category', { successMessage: 'Blog category created successfully' });
+          res.render('jobrecruit/add_job_category', { successMessage: 'Job category created successfully' });
         } else {
-          res.render('jobrecruit/add_job_category', { errorMessage: 'Failed to create blog category' });
+          res.render('jobrecruit/add_job_category', { errorMessage: 'Failed to create job category' });
         }
     } catch (error) {
-      res.render('jobrecruit/add_job_category', { errorMessage: 'Error creating blog category' });
+      res.render('jobrecruit/add_job_category', { errorMessage: 'Error creating job category' });
     }
   },
 
