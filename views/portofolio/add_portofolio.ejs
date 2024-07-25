@@ -65,7 +65,7 @@
                       <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                         <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" id="titleInput" name="title" oninput="generateSlug()" required>
+                          <input type="text" class="form-control" id="titleInput" name="title"  oninput="generateSlug()" required>
                         </div>
                       </div>
                       <div class="form-group row mb-4">
@@ -166,10 +166,27 @@
                           <input type="text" class="form-control" name="altImage">
                         </div>
                       </div>
-                      <div class="form-group row">
+                      <div class="form-group row mb-4">
+                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Closing Description</label>
+                        <div class="col-sm-12 col-md-7">
+                          <textarea name="closingDescription" id="closingDescription"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row align-items-center">
+                        <label class="form-control-label col-sm-3 text-md-right">Galeri</label>
+                        <div class="col-sm-12 col-md-7">
+                          <div class="custom-file">
+                            <input type="file" name="galeri" class="custom-file-input" id="galeri" multiple>
+                            <label class="custom-file-label" for="galeri">Choose Files</label>
+                          </div>
+                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                          <div id="gallery-preview" class="mt-2"></div> <!-- Tempat untuk menampilkan pratinjau gambar -->
+                        </div>
+                      </div>                                                                 
+                      <div class="form-group row mb-4">
                         <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                         <div class="col-sm-12 col-md-7">
-                          <button class="btn btn-primary" type="submit">Create Portofolio</button>
+                          <button type="submit" class="btn btn-primary">Create Portofolio</button>
                         </div>
                       </div>
                     </form>
@@ -179,23 +196,37 @@
             </div>
         </section>
       </div>
+
+      <!-- Footer-->
+      <%- include('../footer.ejs') %>
   </div>
 
   <!-- General JS Scripts -->
-  <script src="/assets/modules/jquery.min.js"></script>
-  <script src="/assets/modules/popper.js"></script>
-  <script src="/assets/modules/tooltip.js"></script>
-  <script src="/assets/modules/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
-  <script src="/assets/modules/moment.min.js"></script>
-  <script src="/assets/js/stisla.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="../assets/js/stisla.js"></script>
 
-  <!-- Template JS File -->
-  <script src="/assets/js/scripts.js"></script>
-  <script src="/assets/js/custom.js"></script>
+   <!-- JS Libraries -->
+   <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+
+   <!-- Template JS File -->
+   <script src="../assets/js/scripts.js"></script>
+   <script src="../assets/js/custom.js"></script>
+ 
+   <!-- Page Specific JS File -->
+   <script src="../assets/js/page/features-posts.js"></script>
+   <!-- SweetAlert JS -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
 
   <script>
     CKEDITOR.replace('body');
+    CKEDITOR.replace('closingDescription');
 
     function generateSlug() {
       var title = document.getElementById("titleInput").value;
@@ -203,30 +234,113 @@
       document.getElementById("slugInput").value = slug;
     }
 
-    document.getElementById("portofolioForm").addEventListener("submit", function (e) {
-      e.preventDefault();
+    document.addEventListener('DOMContentLoaded', function () {
+      $('#logo').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName);
+      });
 
-      var formData = new FormData(this);
-      var token = localStorage.getItem('token');
-      formData.append("token", token);
+      $('#image').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName);
+      });
+      $('#galeri').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName);
+        
+      var fileList = this.files;
+      var galleryPreview = document.getElementById('gallery-preview');
+      galleryPreview.innerHTML = '';
 
-      fetch("/portofolio", {
-        method: "POST",
-        body: formData,
+      for (var i = 0; i < fileList.length; i++) {
+        var file = fileList[i];
+
+        if (file && file.type.match('image.*')) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            var img = document.createElement('img');
+            img.src = e.target.result;
+            img.classList.add('img-thumbnail');
+            img.classList.add('mr-2');
+            img.style.maxWidth = '100px';
+            img.style.maxHeight = '100px';
+            galleryPreview.appendChild(img);
+          };
+
+          reader.readAsDataURL(file);
+        }
+      }
+
+      var fileNameList = [];
+      for (var i = 0; i < fileList.length; i++) {
+        fileNameList.push(fileList[i].name);
+      }
+      var fileName = fileNameList.join(', ');
+      $(this).next('.custom-file-label').html(fileName);
+    });
+
+      const token = localStorage.getItem('token');
+      document.getElementById('tokenInput').value = token;
+    });
+
+    document.getElementById('portofolioForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      Swal.fire({
+        title: 'Loading...',
+        text: 'Please wait!',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      });
+
+      // Sinkronisasi konten CKEditor dengan textarea asli
+      for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
+      }
+
+      const form = document.getElementById('portofolioForm');
+      const formData = new FormData(form);
+      const token = localStorage.getItem('token');
+
+      fetch('https://api-services.newus.id/api/admin/portfolio/new', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
       })
-        .then(response => {
-          if (response.ok) {
-            alert("Portofolio created successfully!");
-          } else {
-            alert("Failed to create portofolio.");
-          }
-        })
-        .catch(error => {
-          console.error("Error:", error);
-          alert("An error occurred while creating the portofolio.");
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.message || 'Failed to create portofolio');
+          });
+        }
+      })
+      .then(data => {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Portofolio created successfully.',
+          icon: 'success',
+        }).then(() => {
+          window.location.href = '/portofolio';
         });
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error creating portofolio: ' + error.message,
+          icon: 'error',
+        });
+      });
     });
   </script>
-</body>
 
+ 
+</body>
 </html>
