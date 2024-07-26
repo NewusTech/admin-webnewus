@@ -102,7 +102,7 @@
                                         <!-- <label for="checkbox-<%= blog.id %>" class="custom-control-label">&nbsp;</label> -->
                                     </div>
                                 </td>
-                                <td><%= blog.blog.title %>
+                                <td><%= blog.title %>
                                     <div class="table-links">
                                         <a href="/admin/<%= blog.slug %>/blog/detail">View</a>
                                         <div class="bullet"></div>
@@ -116,9 +116,9 @@
                                 <% } else if (blog.status=== 1) { %>
                                   <p>Status: Rekomendasi</p>
                                 <% } %></a></td>
-                                <td><a href="#"><img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1"><%= blog.blog.user_title %></div></a></td>
-                                <td><%= blog.blog.keyword %></td>
-                                <td><div class="badge badge-primary"><%= blog.blog.status_desc %></div></td>
+                                <td><a href="#"><img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="title" title=""> <div class="d-inline-block ml-1"><%= blog.user_title %></div></a></td>
+                                <td><%= blog.keyword %></td>
+                                <td><div class="badge badge-primary"><%= blog.status_desc %></div></td>
                             </tr>
                             <% }); %>
                           

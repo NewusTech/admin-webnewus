@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -10,29 +9,14 @@
     <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
 
-    <!-- CSS Libraries -->
-
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/components.css">
-    <!-- Start GA -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-94034622-3');
-    </script>
-    <!-- /END GA -->
 </head>
 <body>
     <div id="app">
         <!-- Sidebar -->
-        <%-include('./sidebar.ejs')-%>
+        <%- include('./sidebar.ejs') %>
   
         <!-- Main Content -->
         <div class="main-content">
@@ -66,47 +50,44 @@
                       <ul class="nav nav-pills flex-column">
                         <li class="nav-item"><a href="/setting" class="nav-link">General</a></li>
                         <li class="nav-item"><a href="/seo" class="nav-link active">SEO</a></li>
-                        <li class="nav-item"><a href="/socialmedia" class="nav-link">Social Media</a></li>
-                        <!-- <li class="nav-item"><a href="#" class="nav-link">System</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Security</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Automation</a></li> -->
+                        <li class="nav-item"><a href="/social/media" class="nav-link">Social Media</a></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-8">
-                  <form id="setting-form">
+                  <form id="settingForm" enctype="multipart/form-data">
+                    <input type="hidden" id="tokenInput" name="token">
                     <div class="card" id="settings-card">
                       <div class="card-header">
-                        <h4>SEO Settings</h4>
+                        <h4>General Settings</h4>
                       </div>
                       <div class="card-body">
-                        <p class="text-muted">SEO settings such as, google analytics, tag manager, and so on.</p>
+                        <p class="text-muted">General settings such as, site title, site description, address and so on.</p>
                         <div class="form-group row align-items-center">
                           <label for="site-title" class="form-control-label col-sm-3 text-md-right">Tag Manager</label>
                           <div class="col-sm-6 col-md-9">
-                            <input type="text" name="site_title" class="form-control" id="site-title">
+                            <input type="text" class="form-control" name="tagManager" value="<%= dataSetting.tagManager %>">
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
-                          <label for="site-title" class="form-control-label col-sm-3 text-md-right">Google Tag Manager</label>
+                          <label for="site-description" class="form-control-label col-sm-3 text-md-right">Google Tag Manager</label>
                           <div class="col-sm-6 col-md-9">
-                            <input type="text" name="site_title" class="form-control" id="site-title">
+                            <textarea class="form-control" name="googleTagManager" id="googleTagManager"><%= dataSetting.googleTagManager %></textarea>
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
-                          <label for="site-title" class="form-control-label col-sm-3 text-md-right">Search Console</label>
+                          <label for="phone-number" class="form-control-label col-sm-3 text-md-right">Search Console</label>
                           <div class="col-sm-6 col-md-9">
-                            <input type="text" name="site_title" class="form-control" id="site-title">
+                            <input type="text" name="searchConsole" class="form-control" id="searchConsole" value="<%= dataSetting.searchConsole %>">
                           </div>
                         </div>
                         <div class="form-group row align-items-center">
-                          <label for="site-title" class="form-control-label col-sm-3 text-md-right">Google Analytics</label>
+                          <label for="address" class="form-control-label col-sm-3 text-md-right">Google Analytics</label>
                           <div class="col-sm-6 col-md-9">
-                            <input type="text" name="site_title" class="form-control" id="site-title">
+                            <input type="text" name="googleAnalytics" class="form-control" id="googleAnalytics" value="<%= dataSetting.googleAnalytics %>">
                           </div>
                         </div>
-
                       </div>
                       <div class="card-footer bg-whitesmoke text-md-right">
                         <button class="btn btn-primary" id="save-btn">Save Changes</button>
@@ -116,33 +97,103 @@
                   </form>
                 </div>
               </div>
-                </div>
-            </section>
+            </div>
+          </section>
         </div>
 
         <!-- Footer-->
-        <%-include('./footer.ejs')-%>
-     
+        <%- include('./footer.ejs') %>
     </div>
   
-    <!-- General JS Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="../assets/js/stisla.js"></script>
-  
-    <!-- JS Libraies -->
-    <script src="../node_modules/codemirror/lib/codemirror.js"></script>
-    <script src="../node_modules/codemirror/mode/javascript/javascript.js"></script>
-  
-    <!-- Template JS File -->
-    <script src="../assets/js/scripts.js"></script>
-    <script src="../assets/js/custom.js"></script>
-  
-    <!-- Page Specific JS File -->
-    <script src="../assets/js/page/features-setting-detail.js"></script>
-  </body>
+  <!-- General JS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="../assets/js/stisla.js"></script>
 
+  <!-- JS Libraries -->
+  <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/features-posts.js"></script>
+  <!-- SweetAlert JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const token = localStorage.getItem('token');
+      document.getElementById('tokenInput').value = token;
+
+      // Update label file input with the filename
+      document.querySelectorAll('.custom-file-input').forEach(input => {
+        input.addEventListener('change', function() {
+          const fileName = this.files[0].name;
+          this.nextElementSibling.innerHTML = fileName;
+        });
+      });
+    });
+
+    document.getElementById('settingForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      Swal.fire({
+        title: 'Loading...',
+        text: 'Please wait!',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      });
+
+      const form = document.getElementById('settingForm');
+      const formData = new FormData(form);
+      const token = localStorage.getItem('token');
+
+       // Log data yang dikirim dari form
+    for (let [key, value] of formData.entries()) {
+      console.log(key, value);
+    }
+
+
+      fetch( `${process.env.baseUrl}/admin/1/seo/update`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      })
+        .then(response => {
+          return response.json().then(data => {
+            if (!response.ok) {
+              throw new Error(data.message || 'Failed to update seo');
+            }
+            return data;
+          });
+        })
+        .then(data => {
+          Swal.fire({
+            title: 'Success!',
+            text: 'SEO updated successfully.',
+            icon: 'success',
+          }).then(() => {
+            window.location.href = '/seo';
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error updating seo: ' + error.message,
+            icon: 'error',
+          });
+        });
+    });
+  </script>
+</body>
 </html>
