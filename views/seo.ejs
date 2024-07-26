@@ -153,20 +153,20 @@
 
       const form = document.getElementById('settingForm');
       const formData = new FormData(form);
+      const formObject = {};
+      
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
       const token = localStorage.getItem('token');
 
-       // Log data yang dikirim dari form
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
-
-
-      fetch( `${process.env.baseUrl}/admin/1/seo/update`, {
+      fetch( `https://api-services.newus.id/api/admin/1/seo/update`, {
         method: 'PUT',
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         },
-        body: formData
+        body: JSON.stringify(formObject)
       })
         .then(response => {
           return response.json().then(data => {

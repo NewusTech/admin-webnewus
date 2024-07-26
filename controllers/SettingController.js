@@ -9,6 +9,7 @@ module.exports = {
       const settingResponse = await axios.get(
         `${process.env.baseUrl}/admin/1/aboutcompany/detail`
       );
+      
   
       let responseData = settingResponse.data;
 
@@ -116,40 +117,4 @@ module.exports = {
     }
   },
 
-  updateSEO: async (req, res) => {
-    try {
- 
-      const id = 1;
-      const { tagManager, googleTagManager, searchConsole, googleAnalytics, token } = req.body;
-  
-      let settingResponse = await axios.put(
-        `${process.env.baseUrl}/admin/${id}/seo/update`,
-        { tagManager, googleTagManager, searchConsole, googleAnalytics },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-        }
-      );
-  
-      if (settingResponse.status === 200) {
-        res.render('seo', {
-          successMessage: 'Category updated successfully',
-          dataSetting: settingResponse.data
-        });
-      } else {
-        res.render('seo', {
-          errorMessage: 'Failed to update category',
-          dataSetting: req.body
-        });
-      }
-    } catch (error) {
-      console.error('Error updating category:', error.message);
-      res.render('seo', {
-        errorMessage: 'Internal Server Error',
-        dataSetting: req.body
-      });
-    }
-  },
 };
