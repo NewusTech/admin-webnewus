@@ -225,7 +225,7 @@
               if (response.ok) {
                 Swal.fire(
                   'Deleted!',
-                  'Your blog has been deleted.',
+                  'Your portfolio has been deleted.',
                   'success'
                 ).then(() => {
                   window.location.reload();
@@ -233,7 +233,7 @@
               } else {
                 Swal.fire(
                   'Failed!',
-                  'There was an error deleting the blog.',
+                  'There was an error deleting the portfolio.',
                   'error'
                 );
               }
@@ -241,7 +241,7 @@
             .catch(error => {
               Swal.fire(
                 'Failed!',
-                'There was an error deleting the blog.',
+                'There was an error deleting the portfolio.',
                 'error'
               );
             });

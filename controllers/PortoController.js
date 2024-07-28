@@ -166,12 +166,12 @@ module.exports = {
       await axios.delete(`${process.env.baseUrl}/admin/${id}/portfolio/deleted`);
 
       res.status(200).json({
-        message: "Portofolio deleted successfully",
+        message: "Portfolio deleted successfully",
       });
     } catch (error) {
       console.error(error);
       res.status(500).json({
-        message: "Error deleting portofolio",
+        message: "Error deleting portfolio",
       });
     }
   },
