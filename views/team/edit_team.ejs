@@ -68,95 +68,110 @@
                                         <div class="form-group row align-items-center">
                                             <label class="form-control-label col-sm-3 text-md-right">Name</label>
                                             <div class="col-sm-6 col-md-9">
-                                                <input type="text" class="form-control" name="name" value="<%= teamData.name || '' %>">
+                                                <input type="text" class="form-control" name="name"
+                                                    value="<%= teamData.name || '' %>">
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" class="form-control" name="title" value="<%= teamData.title || '' %>">
+                                                <input type="text" class="form-control" name="title"
+                                                    value="<%= teamData.title || '' %>">
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <textarea name="description" id="description"><%= teamData.description || '' %></textarea>
+                                                <textarea name="description"
+                                                    id="description"><%= teamData.description || '' %></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Divisi</label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori
+                                                Divisi</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <select class="form-control selectric" name="DivitionCategoryId" id="">
                                                     <% teamcategoryData.forEach(function(category) { %>
-                                                        <option value="<%= category.id %>"><%= category.title %></option>
+                                                    <option value="<%= category.id %>"><%= category.title %></option>
                                                     <% }); %>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Institute</label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Institute</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="text" class="form-control" name="institute"  value="<%= teamData.institute || '' %>">
+                                                <input type="text" class="form-control" name="institute"
+                                                    value="<%= teamData.institute || '' %>">
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Major</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Major</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="text" class="form-control" name="major"  value="<%= teamData.major || '' %>">
+                                                <input type="text" class="form-control" name="major"
+                                                    value="<%= teamData.major || '' %>">
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Address</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Address</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="text" class="form-control" name="address"  value="<%= teamData.address || '' %>">
+                                                <input type="text" class="form-control" name="address"
+                                                    value="<%= teamData.address || '' %>">
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Birthday Date</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Birthday
+                                                Date</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="date" class="form-control" name="birthdayDate"  value="<%= teamData.birthdayDate || '' %>">
+                                                <input type="date" class="form-control" name="birthdayDate"
+                                                    value="<%= teamData.birthdayDate || '' %>">
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="text" class="form-control" name="email"  value="<%= teamData.email || '' %>">
+                                                <input type="text" class="form-control" name="email"
+                                                    value="<%= teamData.email || '' %>">
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Join Date</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Join
+                                                Date</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="date" class="form-control" name="joinDate" value="<%= teamData.joinDate || '' %>">
+                                                <input type="date" class="form-control" name="joinDate"
+                                                    value="<%= teamData.joinDate || '' %>">
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Linkedin</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Linkedin</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="text" class="form-control" name="linkedin"  value="<%= teamData.linkedin || '' %>">
+                                                <input type="text" class="form-control" name="linkedin"
+                                                    value="<%= teamData.linkedin || '' %>">
                                             </div>
-                                          </div>
+                                        </div>
                                         <div class="form-group row align-items-center">
                                             <label class="form-control-label col-sm-3 text-md-right">Image</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <div class="custom-file">
-                                                    <input type="file" name="image" class="custom-file-input" id="image" data-filename="<%= teamData.image || '' %>">
+                                                    <input type="file" name="image" class="custom-file-input" id="image"
+                                                        data-filename="<%= teamData.image || '' %>">
                                                     <label class="custom-file-label" for="image">Choose File</label>
                                                 </div>
-                                                <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                                                <div class="form-text text-muted">The image must have a maximum size of
+                                                    1MB</div>
                                             </div>
                                         </div>
-                                        <!-- <div class="form-group row align-items-center">
-                                            <label class="form-control-label col-sm-3 text-md-right">Achievement</label>
-                                            <div class="col-sm-12 col-md-7">
-                                                <div class="custom-file">
-                                                    <input type="file" name="achievement" class="custom-file-input" id="achievement" data-filename="<%= teamData.achievement || '' %>">
-                                                    <label class="custom-file-label" for="achievement">Choose File</label>
-                                                </div>
-                                                <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
-                                            </div>
-                                        </div> -->
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                             <div class="col-sm-12 col-md-7">
                                                 <button type="submit" class="btn btn-primary">Update Team</button>
                                             </div>
@@ -175,8 +190,12 @@
 
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="../assets/js/stisla.js"></script>
@@ -203,14 +222,14 @@
                 var fileName = $(this).val().split('\\').pop();
                 $(this).next('.custom-file-label').html(fileName);
             });
-
+        
             const token = localStorage.getItem('token');
             document.getElementById('tokenInput').value = token;
         });
-
+        
         document.getElementById('teamForm').addEventListener('submit', function (event) {
             event.preventDefault();
-
+        
             Swal.fire({
                 title: 'Loading...',
                 text: 'Please wait!',
@@ -219,51 +238,55 @@
                     Swal.showLoading()
                 }
             });
-
+        
             // Sinkronisasi konten CKEditor dengan textarea asli
             for (instance in CKEDITOR.instances) {
                 CKEDITOR.instances[instance].updateElement();
             }
-
+        
             const form = document.getElementById('teamForm');
             const formData = new FormData(form);
             const token = localStorage.getItem('token');
-
+        
+            // Log to check if file is appended to FormData
+            console.log(formData.get('image'));
+        
             fetch(`https://api-services.newus.id/api/admin/<%= teamData.id %>/team/update`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return response.json().then(data => {
-                        throw new Error(data.message || 'Failed to update team');
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.json().then(data => {
+                            throw new Error(data.message || 'Failed to update team');
+                        });
+                    }
+                })
+                .then(data => {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Team updated successfully.',
+                        icon: 'success',
+                    }).then(() => {
+                        window.location.href = '/team';
                     });
-                }
-            })
-            .then(data => {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Team updated successfully.',
-                    icon: 'success',
-                }).then(() => {
-                    window.location.href = '/team';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Error updating team: ' + error.message,
+                        icon: 'error',
+                    });
                 });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Error updating team: ' + error.message,
-                    icon: 'error',
-                });
-            });
         });
-    </script>
+        </script>
+        
 </body>
 
 </html>
