@@ -24,6 +24,7 @@ var whyusRouter = require('./routes/whyus');
 var legalitasRouter = require('./routes/legalitas');
 var pagesRouter = require('./routes/pages');
 var kebijakanRouter = require('./routes/kebijakan');
+var bannerRouter = require('./routes/banner');
 
 var app = express();
 
@@ -61,6 +62,7 @@ app.use('/', whyusRouter);
 app.use('/', legalitasRouter);
 app.use('/', pagesRouter);
 app.use('/', kebijakanRouter);
+app.use('/', bannerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
