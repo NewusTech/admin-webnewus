@@ -56,36 +56,21 @@ module.exports = {
   updatePages: async (req, res) => {
     try {
       const id = req.params.id;
-      const { pages, metaTitle, metaDesc, token } = req.body;
+      const pagesData = req.body;
 
-      let pagesResponse = await axios.put(
+      let updateResponse = await axios.put(
         `${process.env.baseUrl}/admin/${id}/seo/pages/update`,
-        { pages, metaTitle, metaDesc },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
+        pagesData
       );
 
-      if (pagesResponse.status === 200) {
-        res.render("pages/edit_pages", {
-          successMessage: "Seo pages updated successfully",
-          pagesData: pagesResponse.data.data,
-        });
+      if (updateResponse.status === 200) {
+        res.redirect('seo/pages');
       } else {
-        res.render("pages/edit_pages", {
-          errorMessage: "Failed to updated seo pages",
-          pagesData: req.body,
-        });
+        res.status(400).send('Failed to update pages data');
       }
     } catch (error) {
-      console.error("Error updating pages:", error.message);
-      res.render("pages/edit_pages", {
-        errorMessage: "Internal Server Error",
-        pagesData: req.body,
-      });
+      console.error('Error updating pages data:', error);
+      res.status(500).send('Internal Server Error');
     }
-  },
-};
+  }
+}

@@ -2,128 +2,204 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>Edit Seo Pages</title>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Edit Seo Pages &mdash; Stisla</title>
 
-    <!-- General CSS Files -->
-    <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/modules/fontawesome/css/all.min.css">
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/components.css">
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/modules/fontawesome/css/all.min.css">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA -->
 </head>
 
 <body>
-    <div id="app">
-        <!-- Sidebar -->
-        <%- include('../sidebar.ejs') %>
-  
-        <!-- Main Content -->
-        <div class="main-content">
-            <section class="section">
-                <div class="section-header">
-                  <div class="section-header-back">
-                    <a href="/pages" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-                  </div>
-                  <h1>Edit Seo Pages</h1>
-                  <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Kelola Pages</a></div>
-                    <div class="breadcrumb-item">Edit Seo Pages</div>
-                  </div>
-                </div>
-      
-                <div class="section-body">
-                  <h2 class="section-title">Edit Seo Pages</h2>
-                  <p class="section-lead">
-                    On this page you can edit a pages and fill in all fields.
-                  </p>
-      
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card">
-                        <div class="card-header">
-                          <h4>Update Your Pages</h4>
-                        </div>
-                        <div class="card-body">
-                          <form id="tagForm" action="/admin/<%= pagesData.id %>/seo/pages/update/" method="POST">
-                            <input type="hidden" id="tokenInput" name="token">
-                            <div class="form-group row mb-4">
-                              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Halaman</label>
-                              <div class="col-sm-12 col-md-7">
-                                <input type="text" class="form-control" name="pages" value="<%= pagesData.pages %>">
-                              </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Meta Title</label>
-                              <div class="col-sm-12 col-md-7">
-                                <input type="text" class="form-control" name="metaTitle" value="<%= pagesData.metaTitle %>">
-                              </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Meta Description</label>
-                                <div class="col-sm-12 col-md-7">
-                                  <input type="text" class="form-control" name="metaDesc" value="<%= pagesData.metaDesc %>">
-                                </div>
-                            </div>
-                            <div class="form-group row mb-4">
-                              <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                              <div class="col-sm-12 col-md-7">
-                                <button type="submit" class="btn btn-primary">Update Pages</button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+  <div id="app">
+    <!-- Sidebar -->
+    <%- include('../sidebar.ejs') %>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <section class="section">
+        <div class="section-header">
+          <div class="section-header-back">
+            <a href="/pages" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+          </div>
+          <h1>Edit Pages</h1>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="#">Pages</a></div>
+            <div class="breadcrumb-item">Edit Pages</div>
+          </div>
         </div>
 
-        <!-- Footer-->
-        <%- include('../footer.ejs') %>
+        <div class="section-body">
+          <h2 class="section-title">Edit Pages</h2>
+          <p class="section-lead">
+            On this page you can edit seo pages and fill in all fields.
+          </p>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Update Your Pages</h4>
+                </div>
+                <div class="card-body">
+                  <form id="pageForm" enctype="multipart/form-data">
+                    <input type="hidden" id="tokenInput" name="token">
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Halaman</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="pages" required value="<%=pagesData.pages %>">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Meta Title</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="metaTitle" value="<%=pagesData.metaTitle %>">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Meta Desc</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="metaDesc" value="<%=pagesData.metaDesc %>">
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="form-control-label col-sm-3 text-md-right">Meta Image</label>
+                      <div class="col-sm-12 col-md-7">
+                          <div class="custom-file">
+                              <input type="file" name="metaImage" class="custom-file-input" id="image" data-filename="<%= pagesData.metaImage || '' %>">
+                              <label class="custom-file-label" for="image" id="imageLabel">Choose File</label>
+                          </div>
+                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="form-control-label col-sm-3 text-md-right">Previous Image</label>
+                      <div class="col-sm-12 col-md-7">
+                        <img src="<%= pagesData.metaImage %>" alt="Previous Image" width="150">
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                      <div class="col-sm-12 col-md-7">
+                        <button type="submit" class="btn btn-primary">Update Pages</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
     </div>
-  
-    <!-- General JS Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="/assets/js/stisla.js"></script>
-  
-    <!-- Template JS File -->
-    <script src="/assets/js/scripts.js"></script>
-    <script src="/assets/js/custom.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
-    <!-- Page Specific JS File -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const token = localStorage.getItem('token');
-        document.getElementById('tokenInput').value = token;
+
+    <!-- Footer-->
+    <%- include('../footer.ejs') %>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="../assets/js/stisla.js"></script>
+
+  <!-- JS Libraries -->
+  <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/features-posts.js"></script>
+  <!-- SweetAlert JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const token = localStorage.getItem('token');
+      document.getElementById('tokenInput').value = token;
+
+      // Event listener untuk input file image
+      document.getElementById('image').addEventListener('change', function(event) {
+        const fileName = event.target.files[0].name;
+        document.querySelector('.custom-file-label').textContent = fileName;
+      });
+    });
+
+    document.getElementById('pageForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      Swal.fire({
+        title: 'Loading...',
+        text: 'Please wait!',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
       });
 
-      <% if (typeof successMessage !== 'undefined') { %>
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: '<%= successMessage %>',
-          didClose: () => {
-            window.location.href = '/seo/pages';
+      const form = document.getElementById('pageForm');
+      const formData = new FormData(form);
+      const token = localStorage.getItem('token');
+
+      fetch(`https://api-services.newus.id/api/admin/<%=pagesData.id %>/seo/pages/update`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return response.json().then(data => {
+              throw new Error(data.message || 'Failed to update pages');
+            });
           }
+        })
+        .then(data => {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Pages updated successfully.',
+            icon: 'success',
+          }).then(() => {
+            window.location.href = '/seo/pages';
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error updating pages: ' + error.message,
+            icon: 'error',
+          });
         });
-      <% } %>
-      <% if (typeof errorMessage !== 'undefined') { %>
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: '<%= errorMessage %>'
-        });
-      <% } %>
-    </script>
-  </body>
+    });
+  </script>
+</body>
 
 </html>
