@@ -65,7 +65,13 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                       <div class="col-sm-12 col-md-7">
-                        <input type="text" class="form-control" name="name" required>
+                        <input type="text" class="form-control"  id="nameInput" name="name"  oninput="generateSlug()" required>
+                      </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control"  id="slugInput" name="slug" required>
                       </div>
                     </div>
                     <div class="form-group row mb-4">
@@ -192,6 +198,13 @@
     document.addEventListener('DOMContentLoaded', function () {
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;
+
+    function generateSlug() {
+    var name = document.getElementById("nameInput").value;
+    var slug = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+    document.getElementById("slugInput").value = slug;
+  }
+    document.getElementById('nameInput').addEventListener('input', generateSlug);
 
       // Event listener for image upload
       document.getElementById('image-upload').addEventListener('change', function () {
