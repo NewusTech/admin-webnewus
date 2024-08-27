@@ -525,6 +525,61 @@ module.exports = {
     } catch (error) {
       res.render('blog/blog_recomendation', { errorMessage: 'Error creating blog recomendation' });
     }
+  },
+
+  viewBlogSelected: async (req, res) => {
+    let blogResponse = await axios.get(
+      // "https://api-services.newus.id/api/admin/blog/get"
+      `${process.env.baseUrl}/admin/blog/selected`,
+    );
+
+    let responseData = blogResponse.data;
+
+    res.render("blog/blog_selected", {
+      blogData : responseData.data,
+    });
+  },
+
+  viewPostBlogSelected: async (req, res) => {
+    let blogResponse = await axios.get(
+      `${process.env.baseUrl}/admin/blog/get` 
+    );
+
+    let responseData = blogResponse.data;
+
+    res.render("blog/add_blog_selected", {
+      blogData : responseData.data
+    });
+  },
+  
+  createBlogSelected: async (req, res) => {
+    try {
+      const { BlogId, status, token } = req.body;
+      const blogResponse = await axios.post(`${process.env.baseUrl}/admin/blog/selected/create`, {
+        BlogId,
+        status,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        token,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      let responseData = response.data;
+  
+      if (responseData.status === 201) {
+        res.render('blog/blog_selected', { 
+          successMessage: 'Blog selected successfully'
+        });
+      } else {
+        res.render('blog/blog_selected', { errorMessage: 'Failed to selected blog' });
+      }
+    } catch (error) {
+      res.render('blog/blog_selected', { errorMessage: 'Error blog selected' });
+    }
   }
   
 };
