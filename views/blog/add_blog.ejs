@@ -10,16 +10,22 @@
   <link rel="stylesheet" href="/assets/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/modules/fontawesome/css/all.min.css">
 
+
   <!-- Template CSS -->
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/assets/css/components.css">
 
-  <!-- Start GA -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-94034622-3');
@@ -32,157 +38,156 @@
     <!-- Sidebar -->
     <%- include('../sidebar.ejs') %>
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <section class="section">
-          <div class="section-header">
-            <div class="section-header-back">
-              <a href="/blog" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-            </div>
-            <h1>Create New Blog</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item"><a href="#">Posts</a></div>
-              <div class="breadcrumb-item">Create New Post</div>
-            </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <section class="section">
+        <div class="section-header">
+          <div class="section-header-back">
+            <a href="/blog" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
+          <h1>Create New Blog</h1>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="#">Posts</a></div>
+            <div class="breadcrumb-item">Create New Post</div>
+          </div>
+        </div>
 
-          <div class="section-body">
-            <h2 class="section-title">New Blog</h2>
-            <p class="section-lead">
-              On this page you can create a new blog and fill in all fields.
-            </p>
+        <div class="section-body">
+          <h2 class="section-title">New Blog</h2>
+          <p class="section-lead">
+            On this page you can create a new blog and fill in all fields.
+          </p>
 
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Write Your Blog</h4>
-                  </div>
-                  <div class="card-body">
-                    <form id="blogForm" enctype="multipart/form-data">
-                      <input type="hidden" id="tokenInput" name="token">
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" id="titleInput" name="title"  oninput="generateSlug()" required>
-                        </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Write Your Blog</h4>
+                </div>
+                <div class="card-body">
+                  <form id="blogForm" enctype="multipart/form-data">
+                    <input type="hidden" id="tokenInput" name="token">
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" id="titleInput" name="title" oninput="generateSlug()"
+                          required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" id="slugInput" name="slug" required>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" id="slugInput" name="slug" required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keyword</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="keyword" required>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keyword</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="keyword" required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Excerpt</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="excerpt" required>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Excerpt</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="excerpt" required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Body</label>
-                        <div class="col-sm-12 col-md-7">
-                          <textarea name="body" id="body"></textarea>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Body</label>
+                      <div class="col-sm-12 col-md-7">
+                        <textarea name="body" id="body"></textarea>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Blog</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select class="form-control selectric" name="tagblog_id" id="">
-                            <% tagData.forEach(function(tag) { %>
-                            <option value="<%= tag.id %>"><%= tag.title %></option>
-                            <% }); %>
-                          </select>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Blog</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select class="form-control" name="tag[]" id="tagblogSelect" multiple="multiple">
+                        </select>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Blog</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select class="form-control selectric" name="kategoriblog_id" id="">
-                            <% blogData.forEach(function(kategoriblog) { %>
-                            <option value="<%= kategoriblog.id %>"><%= kategoriblog.title %></option>
-                            <% }); %>
-                          </select>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Blog</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select class="form-control selectric" name="kategoriblog_id" id="">
+                          <% blogData.forEach(function(kategoriblog) { %>
+                          <option value="<%= kategoriblog.id %>"><%= kategoriblog.title %></option>
+                          <% }); %>
+                        </select>
                       </div>
-                      <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Image</label>
-                        <div class="col-sm-12 col-md-7">
-                          <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="image-upload">
-                            <label class="custom-file-label" for="image-upload" id="image-label">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="form-control-label col-sm-3 text-md-right">Image</label>
+                      <div class="col-sm-12 col-md-7">
+                        <div class="custom-file">
+                          <input type="file" name="image" class="custom-file-input" id="image-upload">
+                          <label class="custom-file-label" for="image-upload" id="image-label">Choose File</label>
                         </div>
+                        <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alt Image</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="altImage">
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alt Image</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="altImage">
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Publish By</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="hidden" name="user_id" id="userId" value="1">
-                          <input type="text" class="form-control" value="Admin" disabled>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Publish By</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="hidden" name="user_id" id="userId" value="1">
+                        <input type="text" class="form-control" value="Admin" disabled>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select name="status" class="form-control selectric" id="">
-                            <option value="1">Published</option>
-                            <option value="2">Draft</option>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select name="status" class="form-control selectric" id="">
+                          <option value="1">Published</option>
+                          <option value="2">Draft</option>
                           <select>
-                        </div>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Publish At</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="date" class="form-control" name="publishAt" required>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Publish At</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="date" class="form-control" name="publishAt" required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                        <div class="col-sm-12 col-md-7">
-                          <button type="submit" class="btn btn-primary">Create Blog</button>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                      <div class="col-sm-12 col-md-7">
+                        <button type="submit" class="btn btn-primary">Create Blog</button>
                       </div>
-                      
-                    </form>
-                  </div>
+                    </div>
+
+                  </form>
                 </div>
               </div>
             </div>
-        </section>
-      </div>
+          </div>
+      </section>
+    </div>
 
-      <!-- Footer-->
-      <%- include('../footer.ejs') %>
+    <!-- Footer-->
+    <%- include('../footer.ejs') %>
   </div>
 
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="../assets/js/stisla.js"></script>
 
   <!-- JS Libraries -->
   <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
@@ -192,7 +197,30 @@
   <script src="../assets/js/page/features-posts.js"></script>
   <!-- SweetAlert JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+
+  <script>
+    $(document).ready(function () {
+      $('#tagblogSelect').select2({
+        tags: true,
+        tokenSeparators: [',', ' '],
+        placeholder: "Enter tags",
+        allowClear: true,
+        width: '80%',
+        createTag: function (params) {
+          var term = $.trim(params.term);
+          if (term === '') {
+            return null;
+          }
+          return {
+            id: term,
+            text: term,
+            newTag: true
+          };
+        }
+      });
+    });
+  </script>
+
   <script>
     CKEDITOR.replace('body');
   </script>
@@ -209,70 +237,75 @@
     });
 
     document.getElementById('blogForm').addEventListener('submit', function (event) {
-  event.preventDefault();
+      event.preventDefault();
 
-  Swal.fire({
-    title: 'Loading...',
-    text: 'Please wait!',
-    allowOutsideClick: false,
-    didOpen: () => {
-      Swal.showLoading()
-    }
-  });
+      Swal.fire({
+        title: 'Loading...',
+        text: 'Please wait!',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
 
-  // Sinkronisasi konten CKEditor dengan textarea asli
-  for (instance in CKEDITOR.instances) {
-    CKEDITOR.instances[instance].updateElement();
-  }
-
-  const form = document.getElementById('blogForm');
-  const formData = new FormData(form);
-  const token = localStorage.getItem('token');
-
-  fetch('https://api-services.newus.id/api/admin/blog/create', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`
-    },
-    body: formData
-  })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        return response.json().then(data => {
-          throw new Error(data.message || 'Failed to create blog');
-        });
+      // Sinkronisasi konten CKEditor dengan textarea asli
+      for (instance in CKEDITOR.instances) {
+        CKEDITOR.instances[instance].updateElement();
       }
-    })
-    .then(data => {
-      Swal.fire({
-        title: 'Success!',
-        text: 'Blog created successfully.',
-        icon: 'success',
-      }).then(() => {
-        window.location.href = '/blog';
-      });
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      Swal.fire({
-        title: 'Error!',
-        text: 'Error creating blog: ' + error.message,
-        icon: 'error',
-      });
-    });
-});
 
+      const form = document.getElementById('blogForm');
+      const formData = new FormData(form);
+      const token = localStorage.getItem('token');
+
+      // Ambil semua nilai dari Select2 (tag)
+      const tags = $('#tagblogSelect').val(); // Mengambil semua nilai tag
+      formData.delete('tag[]'); // Menghapus semua entri tag[] dari FormData agar tidak terduplikasi
+      formData.append('tag', JSON.stringify(tags)); // Menambahkan tag yang digabungkan dalam satu array ke FormData
+
+      // Lakukan fetch ke API dengan FormData yang sudah diperbarui
+      fetch('https://api-services.newus.id/api/admin/blog/create', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return response.json().then(data => {
+              throw new Error(data.message || 'Failed to create blog');
+            });
+          }
+        })
+        .then(data => {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Blog created successfully.',
+            icon: 'success',
+          }).then(() => {
+            window.location.href = '/blog';
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error creating blog: ' + error.message,
+            icon: 'error',
+          });
+        });
+    });
   </script>
 
-<script>
-  function generateSlug() {
-    const title = document.getElementById('titleInput').value.trim().toLowerCase();
-    const slug = title.replace(/\s+/g, '-'); // Ganti spasi dengan tanda dash
-    document.getElementById('slugInput').value = slug;
-  }
-</script>
+  <script>
+    function generateSlug() {
+      const title = document.getElementById('titleInput').value.trim().toLowerCase();
+      const slug = title.replace(/\s+/g, '-'); // Ganti spasi dengan tanda dash
+      document.getElementById('slugInput').value = slug;
+    }
+  </script>
 
 </body>
 

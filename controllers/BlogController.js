@@ -20,16 +20,10 @@ module.exports = {
       `${process.env.baseUrl}/admin/kategoriblog/get`
     );
 
-    let tagResponse = await axios.get(
-      `${process.env.baseUrl}/admin/tagblog/get`
-    );
-
     let responseData = blogResponse.data;
-    let responseDataTag = tagResponse.data;
 
     res.render("blog/add_blog", {
       blogData : responseData.data,
-      tagData : responseDataTag.data,
     });
   },
   
