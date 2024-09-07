@@ -13,13 +13,17 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/assets/css/components.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   <!-- Start GA -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
   <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
 
     gtag('config', 'UA-94034622-3');
@@ -32,197 +36,200 @@
     <!-- Sidebar -->
     <%- include('../sidebar.ejs') %>
 
-      <!-- Main Content -->
-      <div class="main-content">
-        <section class="section">
-          <div class="section-header">
-            <div class="section-header-back">
-              <a href="" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
-            </div>
-            <h1>Create New Portofolio</h1>
-            <div class="section-header-breadcrumb">
-              <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-              <div class="breadcrumb-item"><a href="#">Posts</a></div>
-              <div class="breadcrumb-item">Create New Post</div>
-            </div>
+    <!-- Main Content -->
+    <div class="main-content">
+      <section class="section">
+        <div class="section-header">
+          <div class="section-header-back">
+            <a href="" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
           </div>
+          <h1>Create New Portofolio</h1>
+          <div class="section-header-breadcrumb">
+            <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+            <div class="breadcrumb-item"><a href="#">Posts</a></div>
+            <div class="breadcrumb-item">Create New Post</div>
+          </div>
+        </div>
 
-          <div class="section-body">
-            <h2 class="section-title">New Portofolio</h2>
-            <p class="section-lead">
-              On this page you can create a new portofolio and fill in all fields.
-            </p>
+        <div class="section-body">
+          <h2 class="section-title">New Portofolio</h2>
+          <p class="section-lead">
+            On this page you can create a new portofolio and fill in all fields.
+          </p>
 
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>Write Your Portofolio</h4>
-                  </div>
-                  <div class="card-body">
-                    <form id="portofolioForm" enctype="multipart/form-data">
-                      <input type="hidden" id="tokenInput" name="token">
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" id="titleInput" name="title"  oninput="generateSlug()" required>
-                        </div>
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Write Your Portofolio</h4>
+                </div>
+                <div class="card-body">
+                  <form id="portofolioForm" enctype="multipart/form-data">
+                    <input type="hidden" id="tokenInput" name="token">
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" id="titleInput" name="title" oninput="generateSlug()"
+                          required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" id="slugInput" name="slug" required>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Slug</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" id="slugInput" name="slug" required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keyword</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="keyword" required>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Keyword</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="keyword" required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Excerpt</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="excerpt" required>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Excerpt</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="excerpt" required>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Body</label>
-                        <div class="col-sm-12 col-md-7">
-                          <textarea name="body" id="body"></textarea>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Body</label>
+                      <div class="col-sm-12 col-md-7">
+                        <textarea name="body" id="body"></textarea>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Perusahaan</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="portfolioYear">
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Perusahaan</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="portfolioYear">
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Portofolio</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select class="form-control selectric" name="TagportofolioId" id="">
-                            <% tagData.forEach(function(tag) { %>
-                            <option value="<%= tag.id %>"><%= tag.title %></option>
-                            <% }); %>
-                          </select>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Portofolio</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select class="form-control selectric" name="TagportofolioId" id="">
+                          <% tagData.forEach(function(tag) { %>
+                          <option value="<%= tag.id %>"><%= tag.title %></option>
+                          <% }); %>
+                        </select>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Portofolio</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select class="form-control selectric" name="KategoriportofolioId" id="">
-                            <% portofolioData.forEach(function(portfolioData) { %>
-                            <option value="<%= portfolioData.id %>"><%= portfolioData.title %></option>
-                            <% }); %>
-                          </select>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Portofolio</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select class="form-control selectric" name="KategoriportofolioId" id="">
+                          <% portofolioData.forEach(function(portfolioData) { %>
+                          <option value="<%= portfolioData.id %>"><%= portfolioData.title %></option>
+                          <% }); %>
+                        </select>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portofolio</label>
-                        <div class="col-sm-12 col-md-7">
-                          <select class="form-control selectric" name="TechnologyPortofolioId" id="">
-                            <% technologyData.forEach(function(technologyData) { %>
-                            <option value="<%= technologyData.id %>"><%= technologyData.title %></option>
-                            <% }); %>
-                          </select>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portofolio</label>
+                      <div class="col-sm-12 col-md-7">
+                        <select class="form-control" name="TechnologyPortofolioId[]" id="technologyPortofolio" multiple="multiple">
+                          <% technologyData.forEach(function(technologyData) { %>
+                          <option value="<%= technologyData.id %>"><%= technologyData.title %></option>
+                          <% }); %>
+                        </select>
                       </div>
-                      <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Logo</label>
-                        <div class="col-sm-12 col-md-7">
-                          <div class="custom-file">
-                            <input type="file" name="logo" class="custom-file-input" id="logo">
-                            <label class="custom-file-label" for="logo">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                    </div>                                      
+                    <div class="form-group row align-items-center">
+                      <label class="form-control-label col-sm-3 text-md-right">Logo</label>
+                      <div class="col-sm-12 col-md-7">
+                        <div class="custom-file">
+                          <input type="file" name="logo" class="custom-file-input" id="logo">
+                          <label class="custom-file-label" for="logo">Choose File</label>
                         </div>
+                        <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link Web</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="webLink">
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link Web</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="webLink">
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link Apps</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="appsLink">
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link Apps</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="appsLink">
                       </div>
-                      <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Image</label>
-                        <div class="col-sm-12 col-md-7">
-                          <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="image">
-                            <label class="custom-file-label" for="image">Choose File</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="form-control-label col-sm-3 text-md-right">Image</label>
+                      <div class="col-sm-12 col-md-7">
+                        <div class="custom-file">
+                          <input type="file" name="image" class="custom-file-input" id="image">
+                          <label class="custom-file-label" for="image">Choose File</label>
                         </div>
+                        <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alt Image</label>
-                        <div class="col-sm-12 col-md-7">
-                          <input type="text" class="form-control" name="altImage">
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alt Image</label>
+                      <div class="col-sm-12 col-md-7">
+                        <input type="text" class="form-control" name="altImage">
                       </div>
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Closing Description</label>
-                        <div class="col-sm-12 col-md-7">
-                          <textarea name="closingDescription" id="closingDescription"></textarea>
-                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Closing Description</label>
+                      <div class="col-sm-12 col-md-7">
+                        <textarea name="closingDescription" id="closingDescription"></textarea>
                       </div>
-                      <div class="form-group row align-items-center">
-                        <label class="form-control-label col-sm-3 text-md-right">Galeri</label>
-                        <div class="col-sm-12 col-md-7">
-                          <div class="custom-file">
-                            <input type="file" name="galeri" class="custom-file-input" id="galeri" multiple>
-                            <label class="custom-file-label" for="galeri">Choose Files</label>
-                          </div>
-                          <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
-                          <div id="gallery-preview" class="mt-2"></div> <!-- Tempat untuk menampilkan pratinjau gambar -->
+                    </div>
+                    <div class="form-group row align-items-center">
+                      <label class="form-control-label col-sm-3 text-md-right">Galeri</label>
+                      <div class="col-sm-12 col-md-7">
+                        <div class="custom-file">
+                          <input type="file" name="galeri" class="custom-file-input" id="galeri" multiple>
+                          <label class="custom-file-label" for="galeri">Choose Files</label>
                         </div>
-                      </div>                                                                 
-                      <div class="form-group row mb-4">
-                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                        <div class="col-sm-12 col-md-7">
-                          <button type="submit" class="btn btn-primary">Create Portofolio</button>
-                        </div>
+                        <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                        <div id="gallery-preview" class="mt-2"></div> <!-- Tempat untuk menampilkan pratinjau gambar -->
                       </div>
-                    </form>
-                  </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                      <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                      <div class="col-sm-12 col-md-7">
+                        <button type="submit" class="btn btn-primary">Create Portofolio</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
-        </section>
-      </div>
+          </div>
+      </section>
+    </div>
 
-      <!-- Footer-->
-      <%- include('../footer.ejs') %>
+    <!-- Footer-->
+    <%- include('../footer.ejs') %>
   </div>
 
   <!-- General JS Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="../assets/js/stisla.js"></script>
+  
+  <!-- JS Libraries -->
+  <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-   <!-- JS Libraries -->
-   <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
 
-   <!-- Template JS File -->
-   <script src="../assets/js/scripts.js"></script>
-   <script src="../assets/js/custom.js"></script>
- 
-   <!-- Page Specific JS File -->
-   <script src="../assets/js/page/features-posts.js"></script>
-   <!-- SweetAlert JS -->
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-   
+  <!-- Template JS File -->
+  <script src="../assets/js/scripts.js"></script>
+  <script src="../assets/js/custom.js"></script>
+
+  <!-- Page Specific JS File -->
+  <script src="../assets/js/page/features-posts.js"></script>
+  <!-- SweetAlert JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
   <script>
     CKEDITOR.replace('body');
@@ -233,6 +240,13 @@
       var slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
       document.getElementById("slugInput").value = slug;
     }
+    $(document).ready(function() {
+  $('#technologyPortofolio').select2({
+    placeholder: "Select technologies",
+    allowClear: true
+  });
+});
+
 
     document.addEventListener('DOMContentLoaded', function () {
       $('#logo').on('change', function () {
@@ -247,38 +261,38 @@
       $('#galeri').on('change', function () {
         var fileName = $(this).val().split('\\').pop();
         $(this).next('.custom-file-label').html(fileName);
-        
-      var fileList = this.files;
-      var galleryPreview = document.getElementById('gallery-preview');
-      galleryPreview.innerHTML = '';
 
-      for (var i = 0; i < fileList.length; i++) {
-        var file = fileList[i];
+        var fileList = this.files;
+        var galleryPreview = document.getElementById('gallery-preview');
+        galleryPreview.innerHTML = '';
 
-        if (file && file.type.match('image.*')) {
-          var reader = new FileReader();
+        for (var i = 0; i < fileList.length; i++) {
+          var file = fileList[i];
 
-          reader.onload = function (e) {
-            var img = document.createElement('img');
-            img.src = e.target.result;
-            img.classList.add('img-thumbnail');
-            img.classList.add('mr-2');
-            img.style.maxWidth = '100px';
-            img.style.maxHeight = '100px';
-            galleryPreview.appendChild(img);
-          };
+          if (file && file.type.match('image.*')) {
+            var reader = new FileReader();
 
-          reader.readAsDataURL(file);
+            reader.onload = function (e) {
+              var img = document.createElement('img');
+              img.src = e.target.result;
+              img.classList.add('img-thumbnail');
+              img.classList.add('mr-2');
+              img.style.maxWidth = '100px';
+              img.style.maxHeight = '100px';
+              galleryPreview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+          }
         }
-      }
 
-      var fileNameList = [];
-      for (var i = 0; i < fileList.length; i++) {
-        fileNameList.push(fileList[i].name);
-      }
-      var fileName = fileNameList.join(', ');
-      $(this).next('.custom-file-label').html(fileName);
-    });
+        var fileNameList = [];
+        for (var i = 0; i < fileList.length; i++) {
+          fileNameList.push(fileList[i].name);
+        }
+        var fileName = fileNameList.join(', ');
+        $(this).next('.custom-file-label').html(fileName);
+      });
 
       const token = localStorage.getItem('token');
       document.getElementById('tokenInput').value = token;
@@ -306,41 +320,42 @@
       const token = localStorage.getItem('token');
 
       fetch('https://api-services.newus.id/api/admin/portfolio/new', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData
-      })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return response.json().then(data => {
-            throw new Error(data.message || 'Failed to create portofolio');
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          body: formData
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return response.json().then(data => {
+              throw new Error(data.message || 'Failed to create portofolio');
+            });
+          }
+        })
+        .then(data => {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Portofolio created successfully.',
+            icon: 'success',
+          }).then(() => {
+            window.location.href = '/portofolio';
           });
-        }
-      })
-      .then(data => {
-        Swal.fire({
-          title: 'Success!',
-          text: 'Portofolio created successfully.',
-          icon: 'success',
-        }).then(() => {
-          window.location.href = '/portofolio';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error creating portofolio: ' + error.message,
+            icon: 'error',
+          });
         });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-          title: 'Error!',
-          text: 'Error creating portofolio: ' + error.message,
-          icon: 'error',
-        });
-      });
     });
   </script>
 
- 
+
 </body>
+
 </html>
