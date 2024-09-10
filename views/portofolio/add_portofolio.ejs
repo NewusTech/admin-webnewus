@@ -106,7 +106,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Portofolio</label>
                       <div class="col-sm-12 col-md-7">
-                        <select class="form-control" name="tech[]" id="tagportofolioSelect" multiple="multiple">
+                        <select class="form-control" name="tag[]" id="tagportofolioSelect" multiple="multiple">
                         </select>
                       </div>
                     </div>
@@ -123,7 +123,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portofolio</label>
                       <div class="col-sm-12 col-md-7">
-                        <select class="form-control" name="TechnologyPortofolioId[]" id="technologyPortofolio"
+                        <select class="form-control" name="tech[]" id="technologyPortofolio"
                           multiple="multiple">
                           <% technologyData.forEach(function(technologyData) { %>
                           <option value="<%= technologyData.id %>"><%= technologyData.title %></option>
@@ -300,7 +300,7 @@
         placeholder: "Select or Add Tags",
         allowClear: true,
         tags: true,
-        tokenSeparators: [',', ' '],
+        tokenSeparators: [','],
         width: '100%'
       });
     });
@@ -328,13 +328,12 @@
 
      // Ambil semua nilai dari Select2 (tag portofolio)
      const tags = $('#tagportofolioSelect').val();
+     formData.delete('tag[]');
+     formData.append('tag', JSON.stringify(tags));
+
+     const techs = $('#technologyPortofolio').val();
      formData.delete('tech[]');
-     formData.append('tech', JSON.stringify(tags));
-
-     const techs = $('#technologyPortofolio').val(); // Mengambil nilai array dari Select2
-     formData.delete('TechnologyPortofolioId[]'); // Hapus input lama jika ada
-     techs.forEach((tech) => formData.append('TechnologyPortofolioId[]', tech)); // Menambahkan setiap elemen teknologi sebagai array
-
+     formData.append('tech', JSON.stringify(techs));
 
       fetch('https://api-services.newus.id/api/admin/portfolio/new', {
           method: 'POST',
