@@ -200,7 +200,7 @@
     $(document).ready(function () {
       $('#tagblogSelect').select2({
         tags: true,
-        tokenSeparators: [',', ' '],
+        tokenSeparators: [','],
         placeholder: "Enter Tags",
         allowClear: true,
         width: '100%',
@@ -256,9 +256,9 @@
       const token = localStorage.getItem('token');
 
       // Ambil semua nilai dari Select2 (tag)
-      const tags = $('#tagblogSelect').val(); // Mengambil semua nilai tag
-      formData.delete('tag[]'); // Menghapus semua entri tag[] dari FormData agar tidak terduplikasi
-      formData.append('tag', JSON.stringify(tags)); // Menambahkan tag yang digabungkan dalam satu array ke FormData
+      const tags = $('#tagblogSelect').val();
+      formData.delete('tag[]');
+      formData.append('tag', JSON.stringify(tags));
 
       // Lakukan fetch ke API dengan FormData yang sudah diperbarui
       fetch('https://api-services.newus.id/api/admin/blog/create', {

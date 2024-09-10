@@ -326,9 +326,15 @@
       const formData = new FormData(form);
       const token = localStorage.getItem('token');
 
-      // Ambil semua nilai dari Select2 (tag)
-      const techs = $('#tagportofolioSelect').val();
-      techs.forEach((tech) => formData.append('tech[]', tech));
+     // Ambil semua nilai dari Select2 (tag portofolio)
+     const tags = $('#tagportofolioSelect').val();
+     formData.delete('tech[]');
+     formData.append('tech', JSON.stringify(tags));
+
+     const techs = $('#technologyPortofolio').val(); // Mengambil nilai array dari Select2
+     formData.delete('TechnologyPortofolioId[]'); // Hapus input lama jika ada
+     techs.forEach((tech) => formData.append('TechnologyPortofolioId[]', tech)); // Menambahkan setiap elemen teknologi sebagai array
+
 
       fetch('https://api-services.newus.id/api/admin/portfolio/new', {
           method: 'POST',
