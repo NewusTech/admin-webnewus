@@ -3,8 +3,7 @@ const blogControllers = require("../controllers/BlogController");
 
 router.get('/blog', blogControllers.viewBlog);
 router.get('/blog/create', blogControllers.viewPostBlog);
-router.get('/admin/:slug/blog/detail', blogControllers.detailBlog);
-router.get('/admin/blog/update/:id', blogControllers.viewUpdateBlog);
+router.get('/admin/:slug/blog/detail', blogControllers.viewUpdateBlog);
 router.post('/admin/:id/blog', blogControllers.updateBlog);
 router.delete('/admin/blog/delete/:id', blogControllers.deleteBlog);
 
