@@ -106,10 +106,7 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Portofolio</label>
                       <div class="col-sm-12 col-md-7">
-                        <select class="form-control selectric" name="TagportofolioId" id="">
-                          <% tagData.forEach(function(tag) { %>
-                          <option value="<%= tag.id %>"><%= tag.title %></option>
-                          <% }); %>
+                        <select class="form-control" name="tech[]" id="tagportofolioSelect" multiple="multiple">
                         </select>
                       </div>
                     </div>
@@ -126,13 +123,14 @@
                     <div class="form-group row mb-4">
                       <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portofolio</label>
                       <div class="col-sm-12 col-md-7">
-                        <select class="form-control" name="TechnologyPortofolioId[]" id="technologyPortofolio" multiple="multiple">
+                        <select class="form-control" name="TechnologyPortofolioId[]" id="technologyPortofolio"
+                          multiple="multiple">
                           <% technologyData.forEach(function(technologyData) { %>
                           <option value="<%= technologyData.id %>"><%= technologyData.title %></option>
                           <% }); %>
                         </select>
                       </div>
-                    </div>                                      
+                    </div>
                     <div class="form-group row align-items-center">
                       <label class="form-control-label col-sm-3 text-md-right">Logo</label>
                       <div class="col-sm-12 col-md-7">
@@ -215,10 +213,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="../assets/js/stisla.js"></script>
-  
+
   <!-- JS Libraries -->
-  <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 
   <!-- Template JS File -->
@@ -230,7 +228,6 @@
   <!-- SweetAlert JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
   <script>
     CKEDITOR.replace('body');
     CKEDITOR.replace('closingDescription');
@@ -240,12 +237,12 @@
       var slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
       document.getElementById("slugInput").value = slug;
     }
-    $(document).ready(function() {
-  $('#technologyPortofolio').select2({
-    placeholder: "Select technologies",
-    allowClear: true
-  });
-});
+    $(document).ready(function () {
+      $('#technologyPortofolio').select2({
+        placeholder: "Select technologies",
+        allowClear: true
+      });
+    });
 
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -298,6 +295,16 @@
       document.getElementById('tokenInput').value = token;
     });
 
+    $(document).ready(function () {
+      $('#tagportofolioSelect').select2({
+        placeholder: "Select or Add Tags",
+        allowClear: true,
+        tags: true,
+        tokenSeparators: [',', ' '],
+        width: '100%'
+      });
+    });
+
     document.getElementById('portofolioForm').addEventListener('submit', function (event) {
       event.preventDefault();
 
@@ -318,6 +325,10 @@
       const form = document.getElementById('portofolioForm');
       const formData = new FormData(form);
       const token = localStorage.getItem('token');
+
+      // Ambil semua nilai dari Select2 (tag)
+      const techs = $('#tagportofolioSelect').val();
+      techs.forEach((tech) => formData.append('tech[]', tech));
 
       fetch('https://api-services.newus.id/api/admin/portfolio/new', {
           method: 'POST',
