@@ -97,12 +97,13 @@ module.exports = {
 
   viewUpdateBlog: async (req, res) => {
     try {
-      const { id } = req.params;
+      const { slug } = req.params;
   
       // Panggil API dengan parameter slug
       const blogResponse = await axios.get(
-        `${process.env.baseUrl}/admin/blog/get/${id}`
+        `${process.env.baseUrl}/admin/${slug}/blog/detail`
       );
+
       const blogcategoryResponse = await axios.get(
         `${process.env.baseUrl}/admin/kategoriblog/get`
       );
@@ -110,10 +111,11 @@ module.exports = {
         `${process.env.baseUrl}/admin/tagblog/get`
       );
   
+      
       const responseData = blogResponse.data;
       const responseDataCategory = blogcategoryResponse.data;
       const responseDataTag = tagResponse.data;
-  
+
       res.render("blog/edit_blog", {
         blogData: responseData.data,
         blogcategoryData: responseDataCategory.data,
