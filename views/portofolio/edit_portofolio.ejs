@@ -98,74 +98,87 @@
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Body</label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Body</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <textarea name="body" id="body"><%= portofolioData.body %></textarea>
                                             </div>
-                                        </div>                                          
+                                        </div>
                                         <div class="form-group row mb-4">
-                                            <label
-                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Perusahaan</label>
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama
+                                                Perusahaan</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <input type="text" class="form-control" name="portfolioYear"
                                                     value="<%=portofolioData.portfolioYear %>">
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Portofolio</label>
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag
+                                                Portofolio</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <select class="form-control" name="tag[]" id="tagportofolioSelect" multiple="multiple">
+                                                <select class="form-control" name="tag[]" id="tagportofolioSelect"
+                                                    multiple="multiple">
                                                     <% portofolioData.tags.forEach(function(tag) { %>
-                                                        <option value="<%= tag.title %>" selected><%= tag.title %></option>
+                                                    <option value="<%= tag.title %>" selected><%= tag.title %></option>
                                                     <% }); %>
                                                 </select>
                                             </div>
-                                        </div>                                           
+                                        </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Portofolio</label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori
+                                                Portofolio</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <select class="form-control selectric" name="KategoriportofolioId" id="">
+                                                <select class="form-control selectric" name="KategoriportofolioId"
+                                                    id="">
                                                     <% portofoliocategoryData.forEach(function(category) { %>
-                                                        <option value="<%= category.id %>"><%= category.title %></option>
+                                                    <option value="<%= category.id %>"><%= category.title %></option>
                                                     <% }); %>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portfolio</label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology
+                                                Portfolio</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <select class="form-control selectric" name="tech[]" id="technologyPortofolio" multiple="multiple">
+                                                <select class="form-control selectric" name="tech[]"
+                                                    id="technologyPortofolio" multiple="multiple">
                                                     <% technologyData.forEach(function(masterTech){ %>
-                                                        <option value="<%= masterTech.id %>"
-                                                            <% portofolioData.techs.forEach(function(tech){ %>
-                                                                <% if (tech.tech.id === masterTech.id) { %> selected <% } %>
-                                                            <% }); %>>
-                                                            <%= masterTech.title %>
-                                                        </option>
+                                                    <option value="<%= masterTech.id %>"
+                                                        <% portofolioData.techs.forEach(function(tech){ %>
+                                                        <% if (tech.tech.id === masterTech.id) { %> selected <% } %>
+                                                        <% }); %>>
+                                                        <%= masterTech.title %>
+                                                    </option>
                                                     <% }); %>
                                                 </select>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group row align-items-center">
                                             <label class="form-control-label col-sm-3 text-md-right">Logo</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <div class="custom-file">
-                                                    <input type="file" name="logo" class="custom-file-input" id="logo" data-filename="<%= portofolioData.logo %>">
+                                                    <input type="file" name="logo" class="custom-file-input" id="logo"
+                                                        data-filename="<%= portofolioData.logo %>">
                                                     <label class="custom-file-label" for="logo">Choose File</label>
                                                 </div>
-                                                <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                                                <div class="form-text text-muted">The image must have a maximum size of
+                                                    1MB</div>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link Web</label>
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link
+                                                Web</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <input type="text" class="form-control" name="webLink"
                                                     value="<%=portofolioData.webLink %>">
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link Apps</label>
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Link
+                                                Apps</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <input type="text" class="form-control" name="appsLink"
                                                     value="<%=portofolioData.appsLink %>">
@@ -175,59 +188,72 @@
                                             <label class="form-control-label col-sm-3 text-md-right">Image</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <div class="custom-file">
-                                                    <input type="file" name="image" class="custom-file-input" id="image" data-filename="<%= portofolioData.image %>">
+                                                    <input type="file" name="image" class="custom-file-input" id="image"
+                                                        data-filename="<%= portofolioData.image %>">
                                                     <label class="custom-file-label" for="image">Choose File</label>
                                                 </div>
-                                                <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
+                                                <div class="form-text text-muted">The image must have a maximum size of
+                                                    1MB</div>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alt Image</label>
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Alt
+                                                Image</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <input type="text" class="form-control" name="altImage" value="<%=portofolioData.altImage %>">
+                                                <input type="text" class="form-control" name="altImage"
+                                                    value="<%=portofolioData.altImage %>">
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Closing Description</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Closing
+                                                Description</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <textarea name="closingDescription" id="closingDescription"><%= portofolioData.closingDescription %></textarea>
+                                                <textarea name="closingDescription"
+                                                    id="closingDescription"><%= portofolioData.closingDescription %></textarea>
                                             </div>
-                                          </div>
-                                          <div class="form-group row align-items-center">
+                                        </div>
+                                        <div class="form-group row align-items-center">
                                             <label class="form-control-label col-sm-3 text-md-right">Galeri</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <div class="custom-file">
-                                                <input type="file" name="galeri" class="custom-file-input" id="galeri" data-filename="<%= portofolioData.galeri %>" multiple>
-                                                <label class="custom-file-label" for="galeri">Choose Files</label>
-                                              </div>
-                                              <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
-                                              <div id="gallery-preview" class="mt-2"></div> <!-- Tempat untuk menampilkan pratinjau gambar -->
+                                                <div class="custom-file">
+                                                    <input type="file" name="galeri" class="custom-file-input"
+                                                        id="galeri" data-filename="<%= portofolioData.galeri %>"
+                                                        multiple>
+                                                    <label class="custom-file-label" for="galeri">Choose Files</label>
+                                                </div>
+                                                <div class="form-text text-muted">The image must have a maximum size of
+                                                    1MB</div>
+                                                <div id="gallery-preview" class="mt-2"></div>
+                                                <!-- Tempat untuk menampilkan pratinjau gambar -->
                                             </div>
-                                          </div>
-                                          <div class="form-group row mb-4">
-                                            <label
-                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name Testimony</label>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name
+                                                Testimony</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <input type="text" class="form-control" name="nameTestimony"
                                                     value="<%=portofolioData.nameTestimony %>">
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label
-                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date Testimony</label>
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date
+                                                Testimony</label>
                                             <div class="col-sm-12 col-md-7">
                                                 <input type="date" class="form-control" name="dateTestimony"
                                                     value="<%=portofolioData.dateTestimony %>">
                                             </div>
                                         </div>
-                                          <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Testimony</label>
-                                            <div class="col-sm-12 col-md-7">
-                                                <textarea name="testimony" id="testimony"><%= portofolioData.testimony %></textarea>
-                                            </div>
-                                        </div>        
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Testimony</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <textarea name="testimony"
+                                                    id="testimony"><%= portofolioData.testimony %></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                             <div class="col-sm-12 col-md-7">
                                                 <button type="submit" class="btn btn-primary">Update Portofolio</button>
                                             </div>
@@ -318,7 +344,7 @@
             formData.delete('tag[]');
             formData.append('tag', JSON.stringify(tags));
 
-            const techs = $('#technologyPortofolio').val().map(function(tech) {
+            const techs = $('#technologyPortofolio').val().map(function (tech) {
                 return parseInt(tech, 10); // Mengonversi setiap nilai ke integer
             });
 
@@ -328,38 +354,38 @@
 
 
             fetch(`https://api-services.newus.id/api/admin/<%=portofolioData.id %>/portfolio/update/`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                },
-                body: formData
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    return response.json().then(data => {
-                        throw new Error(data.message || 'Failed to update portofolio');
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        return response.json().then(data => {
+                            throw new Error(data.message || 'Failed to update portofolio');
+                        });
+                    }
+                })
+                .then(data => {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Portofolio updated successfully.',
+                        icon: 'success',
+                    }).then(() => {
+                        window.location.href = '/portofolio';
                     });
-                }
-            })
-            .then(data => {
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Portofolio updated successfully.',
-                    icon: 'success',
-                }).then(() => {
-                    window.location.href = '/portofolio';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Error updating portofolio: ' + error.message,
+                        icon: 'error',
+                    });
                 });
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Error updating portofolio: ' + error.message,
-                    icon: 'error',
-                });
-            });
         });
 
         function generateSlug() {
@@ -368,36 +394,36 @@
             document.getElementById('slugInput').value = slug;
         }
     </script>
-    
-    <script>
-    $(document).ready(function () {
-      $('#tagportofolioSelect').select2({
-        tags: true,
-        tokenSeparators: [','],
-        placeholder: "Enter Tags",
-        allowClear: true,
-        width: '100%',
-        createTag: function (params) {
-          var term = $.trim(params.term);
-          if (term === '') {
-            return null;
-          }
-          return {
-            id: term,
-            text: term,
-            newTag: true
-          };
-        }
-      });
-    });
 
-    $(document).ready(function () {
-      $('#technologyPortofolio').select2({
-        placeholder: "Select technologies",
-        allowClear: true
-      });
-    });
-  </script>
+    <script>
+        $(document).ready(function () {
+            $('#tagportofolioSelect').select2({
+                tags: true,
+                tokenSeparators: [','],
+                placeholder: "Enter Tags",
+                allowClear: true,
+                width: '100%',
+                createTag: function (params) {
+                    var term = $.trim(params.term);
+                    if (term === '') {
+                        return null;
+                    }
+                    return {
+                        id: term,
+                        text: term,
+                        newTag: true
+                    };
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#technologyPortofolio').select2({
+                placeholder: "Select technologies",
+                allowClear: true
+            });
+        });
+    </script>
 </body>
 
 </html>
