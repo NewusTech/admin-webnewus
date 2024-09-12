@@ -17,6 +17,7 @@
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -113,13 +114,13 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tag Portofolio</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <select class="form-control selectric" name="TagportofolioId" id="">
-                                                    <% tagData.forEach(function(tag) { %>
-                                                        <option value="<%= tag.id %>"><%= tag.title %></option>
+                                                <select class="form-control" name="tag[]" id="tagportofolioSelect" multiple="multiple">
+                                                    <% portofolioData.tags.forEach(function(tag) { %>
+                                                        <option value="<%= tag.title %>" selected><%= tag.title %></option>
                                                     <% }); %>
                                                 </select>
                                             </div>
-                                        </div>                                          
+                                        </div>                                           
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Kategori Portofolio</label>
                                             <div class="col-sm-12 col-md-7">
@@ -131,15 +132,21 @@
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portofolio</label>
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Technology Portfolio</label>
                                             <div class="col-sm-12 col-md-7">
-                                              <select class="form-control selectric" name="TechnologyPortofolioId" id="">
-                                                <% technologyData.forEach(function(technologyData) { %>
-                                                <option value="<%= technologyData.id %>"><%= technologyData.title %></option>
-                                                <% }); %>
-                                              </select>
+                                                <select class="form-control selectric" name="tech[]" id="technologyPortofolio" multiple="multiple">
+                                                    <% technologyData.forEach(function(masterTech){ %>
+                                                        <option value="<%= masterTech.id %>"
+                                                            <% portofolioData.techs.forEach(function(tech){ %>
+                                                                <% if (tech.tech.id === masterTech.id) { %> selected <% } %>
+                                                            <% }); %>>
+                                                            <%= masterTech.title %>
+                                                        </option>
+                                                    <% }); %>
+                                                </select>
                                             </div>
-                                          </div>
+                                        </div>
+                                        
                                         <div class="form-group row align-items-center">
                                             <label class="form-control-label col-sm-3 text-md-right">Logo</label>
                                             <div class="col-sm-12 col-md-7">
@@ -196,7 +203,29 @@
                                               <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
                                               <div id="gallery-preview" class="mt-2"></div> <!-- Tempat untuk menampilkan pratinjau gambar -->
                                             </div>
-                                          </div>       
+                                          </div>
+                                          <div class="form-group row mb-4">
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name Testimony</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" class="form-control" name="nameTestimony"
+                                                    value="<%=portofolioData.nameTestimony %>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row mb-4"></div>
+                                            <label
+                                                class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Date Testimony</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" class="form-control" name="dateTestimony"
+                                                    value="<%=portofolioData.dateTestimony %>">
+                                            </div>
+                                        </div>
+                                          <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Testimony</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <textarea name="testimony" id="testimony"><%= portofolioData.testimony %></textarea>
+                                            </div>
+                                        </div>        
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                             <div class="col-sm-12 col-md-7">
@@ -239,11 +268,14 @@
     <!-- SweetAlert JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <script src="../node_modules/selectric/public/jquery.selectric.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
         CKEDITOR.replace('body');
         CKEDITOR.replace('closingDescription');
     </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             $('#logo').on('change', function () {
@@ -280,6 +312,19 @@
             const form = document.getElementById('portofolioForm');
             const formData = new FormData(form);
             const token = localStorage.getItem('token');
+
+            const tags = $('#tagportofolioSelect').val();
+            formData.delete('tag[]');
+            formData.append('tag', JSON.stringify(tags));
+
+            const techs = $('#technologyPortofolio').val().map(function(tech) {
+                return parseInt(tech, 10); // Mengonversi setiap nilai ke integer
+            });
+
+            formData.delete('tech[]');
+            formData.append('tech', JSON.stringify(techs));
+
+
 
             fetch(`https://api-services.newus.id/api/admin/<%=portofolioData.id %>/portfolio/update/`, {
                 method: 'PUT',
@@ -322,6 +367,36 @@
             document.getElementById('slugInput').value = slug;
         }
     </script>
+    
+    <script>
+    $(document).ready(function () {
+      $('#tagportofolioSelect').select2({
+        tags: true,
+        tokenSeparators: [','],
+        placeholder: "Enter Tags",
+        allowClear: true,
+        width: '100%',
+        createTag: function (params) {
+          var term = $.trim(params.term);
+          if (term === '') {
+            return null;
+          }
+          return {
+            id: term,
+            text: term,
+            newTag: true
+          };
+        }
+      });
+    });
+
+    $(document).ready(function () {
+      $('#technologyPortofolio').select2({
+        placeholder: "Select technologies",
+        allowClear: true
+      });
+    });
+  </script>
 </body>
 
 </html>

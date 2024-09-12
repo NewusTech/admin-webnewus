@@ -121,18 +121,21 @@ module.exports = {
       );
   
       const responseData = portofolioResponse.data;
+
       const responseDataCategory = portofoliocategoryResponse.data;
       const responseDataTag = tagResponse.data;
+
       let responseDataTechnology = technologyResponse.data;
-  
+
       res.render("portofolio/edit_portofolio", {
-        portofolioData: responseData.portfolio,
+        portofolioData: responseData.data,
         portofoliocategoryData: responseDataCategory.data,
         tagData : responseDataTag.data,
         technologyData : responseDataTechnology.data,
       });
     } catch (error) {
       console.error(error);
+      
       res.status(500).send("Terjadi kesalahan pada server");
     }
   },
